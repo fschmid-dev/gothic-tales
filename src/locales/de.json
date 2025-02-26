@@ -1,0 +1,72 @@
+{
+  "abilities": {
+    "body": "Körper",
+    "other": "Andere",
+    "senses": "Sinne",
+    "social": "Sozial"
+  },
+  "attribute": {
+    "concentration": "Konzentration",
+    "concentrationShort": "Konz",
+    "dexterity": "Geschicklichkeit",
+    "dexterityShort": "Ge",
+    "intuition": "Intuition",
+    "intuitionShort": "Intu",
+    "endurance": "Ausdauer",
+    "enduranceShort": "Ausd",
+    "experience": "Erfahrung",
+    "experienceShort": "Erf",
+    "strength": "Stärke",
+    "strengthShort": "St"
+  },
+  "app": {
+    "name": "Gothic Tales"
+  },
+  "back": "Zurück",
+  "cancel": "Abbrechen",
+  "create": "Erstellen",
+  "createHeroModal": {
+    "defaultValue": "Neuer Held",
+    "html": "Bitte den Namen des Helden eingeben.<br><small><i>Der Namenlose Held ist nicht erlaubt</i> \uD83D\uDE1C</small>",
+    "placeholder": "Name des Helden",
+    "title": "Neuen Held erstellen",
+    "namelessHero": {
+      "name": "Namenlose Held",
+      "html": "Wie gesagt, du bist <b>nicht</b> der Namenlose Held!"
+    }
+  },
+  "close": "Schließen",
+  "delete": "Löschen",
+  "deleteHero": {
+    "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
+    "title": "\"{name}\"<br>wirklich löschen?",
+    "deletedModal": {
+      "title": "\"{name}\"<br>wurde gelöscht",
+      "text": "Möge Innos der Seele gnädig sein."
+    }
+  },
+  "diceShort": "W",
+  "error": "Fehler",
+  "heroes": "Helden",
+  "hero": {
+    "ability": "Fähigkeit",
+    "abilities": "Fähigkeiten",
+    "attribute": "Attribut",
+    "attributes": "Attributes",
+    "learningPoints": "Lernpunkte",
+    "learningPointsShort": "LP",
+    "level": "Stufe"
+  },
+  "heroesView": {
+    "headline": "Deine Helden!"
+  },
+  "heroView": {
+    "createHeroModal": {
+      "title": "Titel",
+      "html": "html"
+    }
+  },
+  "new": "Neu",
+  "sum": "Summe {sum}",
+  "Weapons & Actions": "Waffen & Aktionen"
+}
