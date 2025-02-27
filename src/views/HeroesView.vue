@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 
 import { useHeroStore } from '@/stores/hero.js'
 import { createHero } from '@/utils/HeroFactory.js'
+import { deleteHeroModal } from '@/utils/deleteHeroModal.js'
 
 const { t } = useI18n()
 
@@ -68,27 +69,8 @@ function createHeroCallback(name) {
 }
 
 function deleteHero(hero) {
-  Swal.fire({
-    title: t('deleteHero.title', { name: hero.name }),
-    text: t('deleteHero.text'),
-    icon: 'warning',
-    confirmButtonText: t('delete'),
-    confirmButtonColor: 'var(--bs-primary)',
-    showCancelButton: true,
-    cancelButtonColor: 'var(--bs-danger)',
-    cancelButtonText: t('cancel'),
-    preConfirm: () => {
-      heroStore.deleteHero(hero)
-      Swal.fire({
-        title: t('deleteHero.deletedModal.title', { name: hero.name }),
-        html: t('deleteHero.deletedModal.text'),
-        icon: 'success',
-        timer: 2000,
-        timerProgressBar: true,
-        confirmButtonText: t('close'),
-        confirmButtonColor: 'var(--bs-primary)',
-      })
-    },
+  deleteHeroModal(hero, () => {
+    heroStore.deleteHero(hero)
   })
 }
 </script>

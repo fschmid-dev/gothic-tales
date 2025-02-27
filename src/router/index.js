@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 
 import HeroesView from '@/views/HeroesView.vue'
 import HeroView from '@/views/HeroView.vue'
+import HeroViewBak from '@/views/HeroViewBak.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/hero/:heroId',
       name: 'hero',
       component: HeroView,
+    },
+    {
+      path: '/hero_bak/:heroId',
+      name: 'hero_bak',
+      component: HeroViewBak,
     },
   ],
 })

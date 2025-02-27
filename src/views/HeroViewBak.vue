@@ -4,10 +4,14 @@ import { useHeroStore } from '@/stores/hero.js'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
+import HeroBakAttributes from '@/components/HeroBak/HeroBakAttributes.vue'
+import HeroBakStats from '@/components/HeroBak/HeroBakStats.vue'
+import HeroBakInfo from '@/components/HeroBak/HeroBakInfo.vue'
+import HeroBakAbilities from '@/components/HeroBak/HeroBakAbilities.vue'
+import HeroBakActions from '@/components/HeroBak/HeroBakActions.vue'
+import HeroBakTalents from '@/components/HeroBak/HeroBakTalents.vue'
 import { deleteHeroModal } from '@/utils/deleteHeroModal.js'
 import router from '@/router/index.js'
-import HeroAttributes from '@/components/Hero/HeroAttributes.vue'
-import HeroAbilities from '@/components/Hero/HeroAbilities.vue'
 
 const route = useRoute()
 
@@ -16,13 +20,25 @@ const { getHeroById } = storeToRefs(heroStore)
 
 const heroId = ref(+route.params.heroId)
 const hero = computed(() => {
-  const hero = getHeroById.value(heroId.value)
-  if (!hero) {
-    return null
-  }
-
-  return Object.assign({}, hero)
+  return getHeroById.value(heroId.value)
 })
+
+const editMode = ref(false);
+const tmpHero = ref(null);
+
+function startEditMode() {
+  tmpHero.value = JSON.parse(JSON.stringify(hero.value));
+  editMode.value = true;
+}
+
+function cancelEditMode() {
+  console.warn('cancelEditMode');
+  editMode.value = false;
+}
+
+function saveChanges() {
+
+}
 
 function deleteHero() {
   deleteHeroModal(hero.value, () => {
@@ -34,7 +50,6 @@ function deleteHero() {
 watch(
   () => route.params.heroId,
   (newHeroId) => {
-    console.warn('route.params.heroId', newHeroId)
     heroId.value = +newHeroId
   },
 )
@@ -50,30 +65,45 @@ watch(
         <h1>{{ hero.name }}</h1>
       </div>
       <div class="d-flex gap-2">
-        <button class="btn btn-danger" @click="deleteHero">
-          <i class="fas fa-fw fa-trash-alt"></i>
-        </button>
+        <template v-if="editMode">
+          <div class="btn-group">
+            <button class="btn btn-success" @click="saveChanges">
+              <i class="fas fa-fw fa-save"></i>
+            </button>
+            <button class="btn btn-danger" @click="cancelEditMode">
+              <i class="fas fa-fw fa-cancel"></i>
+            </button>
+          </div>
+        </template>
+        <template v-if="!editMode">
+          <button class="btn btn-primary" @click="startEditMode">
+            <i class="fas fa-edit fa-fw"></i>
+          </button>
+          <button class="btn btn-danger" @click="deleteHero">
+            <i class="fas fa-fw fa-trash-alt"></i>
+          </button>
+        </template>
       </div>
     </div>
-    <hr />
+    <hr>
     <div class="hero">
       <div class="hero__attribute">
-        <HeroAttributes :hero="hero" />
+        <HeroBakAttributes :hero="hero" :editMode="editMode" />
       </div>
       <div class="hero__stats">
-        <h2>HeroStats</h2>
+        <HeroBakStats :hero="hero" :editMode="editMode" />
       </div>
       <div class="hero__info">
-        <h2>HeroInfo</h2>
+        <HeroBakInfo :hero="hero" :editMode="editMode" />
       </div>
       <div class="hero__abilities">
-        <HeroAbilities :hero="hero" />
+        <HeroBakAbilities :hero="hero" :editMode="editMode" />
       </div>
       <div class="hero__actions">
-        <h2>HeroActions</h2>
+        <HeroBakActions :hero="hero" :editMode="editMode" />
       </div>
       <div class="hero__talents">
-        <h2>HeroTalents</h2>
+        <HeroBakTalents :hero="hero" :editMode="editMode" />
       </div>
     </div>
   </div>

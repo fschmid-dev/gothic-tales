@@ -2,79 +2,85 @@ import { Hero } from '@/models/Hero.js'
 
 export const heroAttributes = {
   strength: 10,
-  dexterity: 20,
-  endurance: 30,
-  concentration: 40,
-  intuition: 50,
-  experience: 60,
+  dexterity: 10,
+  endurance: 10,
+  concentration: 10,
+  intuition: 10,
+  experience: 10,
 }
 
 export const heroAbilities = [
   // Body-Abilities
   {
-    name: 'Durchhalten',
+    name: 'endure',
+    attributes: ['concentration', 'endurance'],
+    honeLevel: 0,
+    category: 'body',
+  },
+  {
+    name: 'moveObject',
     attributes: ['strength', 'endurance'],
     honeLevel: 0,
     category: 'body',
   },
   {
-    name: 'Springen/Klettern',
+    name: 'jumping/climbing',
     attributes: ['strength', 'dexterity'],
     honeLevel: 0,
     category: 'body',
   },
   {
-    name: 'Gewandtheit',
+    name: 'agility',
     attributes: ['dexterity', 'experience'],
     honeLevel: 0,
     category: 'body',
   },
   {
-    name: 'Heimlichkeit',
+    name: 'stealth',
     attributes: ['dexterity', 'intuition'],
     honeLevel: 0,
     category: 'body',
   },
   // Social-Abilities
   {
-    name: 'Überreden',
+    name: 'persuade',
     attributes: ['concentration', 'intuition'],
     honeLevel: 0,
     category: 'social',
   },
   {
-    name: 'Einschüchtern',
+    name: 'intimidate',
     attributes: ['concentration', 'strength'],
     honeLevel: 0,
     category: 'social',
   },
   {
-    name: 'Betrügen',
+    name: 'deceive',
     attributes: ['dexterity', 'intuition'],
     honeLevel: 0,
     category: 'social',
   },
   {
-    name: 'Menschenkenntnis',
+    name: 'insight',
     attributes: ['intuition', 'experience'],
     honeLevel: 0,
     category: 'social',
   },
   // Senses-Abilities
   {
-    name: 'Wahrnehmen',
+    name: 'perceive',
     attributes: ['strength', 'endurance'],
     honeLevel: 0,
     category: 'senses',
   },
   {
-    name: 'Erinnern/Erwägen/Erforschen',
+    name: 'remembering/reflection/research',
     attributes: ['intuition', 'experience'],
     honeLevel: 0,
     category: 'senses',
   },
   {
-    name: 'Magiegespür',
+    name: 'magicSense',
     attributes: ['concentration', 'experience'],
     honeLevel: 0,
     category: 'senses',

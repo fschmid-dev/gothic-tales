@@ -1,14 +1,17 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 
+const route = useRoute()
+const path = computed(() => route.path)
 const { t } = useI18n()
 </script>
 
 <template>
   <header id="header" class="navbar navbar-dark navbar-expand-md bg-dark">
     <div class="container-fluid d-flex justify-content-between">
-      <RouterLink :to="{ name: 'home' }" class="navbar-brand"> Gothic Tales </RouterLink>
+      <RouterLink :to="{ name: 'home' }" class="navbar-brand"> Gothic Tales</RouterLink>
 
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -22,9 +25,9 @@ const { t } = useI18n()
   </header>
 
   <RouterView v-slot="{ Component }">
-    <div class="container-fluid mt-3">
+    <div class="container-fluid container-xxl mt-3">
       <Transition name="fade" mode="out-in">
-        <Component :is="Component" />
+        <Component :is="Component" :key="path" />
       </Transition>
     </div>
   </RouterView>
@@ -43,6 +46,7 @@ const { t } = useI18n()
   transform: translateX(-20px);
   opacity: 0;
 }
+
 .fade-enter-from {
   transform: translateX(20px);
   opacity: 0;

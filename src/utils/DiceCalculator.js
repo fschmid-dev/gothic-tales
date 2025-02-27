@@ -1,8 +1,13 @@
+import { i18n } from '@/i18n.js'
+
+const { t } = i18n.global
+
 export function calculateDiceAndBonus(value) {
   const dice = calculateDice(value)
   const bonus = calculateBonus(value)
 
   const pool = []
+  let notation = ''
 
   for (const diceSides of Object.keys(dice)) {
     const count = dice[diceSides]
@@ -11,18 +16,29 @@ export function calculateDiceAndBonus(value) {
       sides: diceSides,
       count: count,
     })
+
+    if (notation) {
+      notation += '+'
+    }
+    notation += `${count}${t('diceShort')}${diceSides}`
   }
   if (bonus > 0) {
     pool.push({
       type: 'bonus',
       bonus: bonus
     })
+
+    if (notation) {
+      notation += '+'
+    }
+    notation += `${bonus}`
   }
 
   return {
     dice: dice,
     bonus: bonus,
-    pool: pool
+    pool: pool,
+    notation: notation,
   }
 }
 

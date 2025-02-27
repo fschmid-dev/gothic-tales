@@ -4,6 +4,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  editMode: {
+    type: Boolean,
+    default: false,
+  }
 })
 /**
  * @typedef {import('@/models/Hero.js').Hero} Hero

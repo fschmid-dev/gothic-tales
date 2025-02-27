@@ -3,7 +3,19 @@
     "body": "Körper",
     "other": "Andere",
     "senses": "Sinne",
-    "social": "Sozial"
+    "social": "Sozial",
+    "endure": "Durchhalten",
+    "moveObject": "Objekte bewegen",
+    "jumping/climbing": "Springen/Klettern",
+    "agility": "Gewandtheit",
+    "stealth": "Heimlichkeit",
+    "persuade": "Überreden",
+    "intimidate": "Einschüchtern",
+    "deceive": "Betrügen",
+    "insight": "Menschenkenntnis",
+    "perceive": "Wahrnehmen",
+    "remembering/reflection/research": "Erinnern/Erwägen/Erforschen",
+    "magicSense": "Magiegespür"
   },
   "attribute": {
     "concentration": "Konzentration",
@@ -66,7 +78,15 @@
       "html": "html"
     }
   },
+  "honeLevel": {
+    "beginner": "Anfänger",
+    "practiced": "geübt",
+    "taught": "gelehrt",
+    "mastered": "gemeistert"
+  },
   "new": "Neu",
   "sum": "Summe {sum}",
+  "value": "Wert",
+  "valueDisplay": "Wert: {value}",
   "Weapons & Actions": "Waffen & Aktionen"
 }

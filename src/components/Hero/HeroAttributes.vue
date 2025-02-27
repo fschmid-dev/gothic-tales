@@ -1,22 +1,16 @@
 <script setup>
-import { computed } from 'vue'
-import { calculateDiceAndBonus } from '@/utils/DiceCalculator.js'
 import { useI18n } from 'vue-i18n'
 import { attributeColors } from '@/utils/attributeColors.js'
+import { computed } from 'vue'
+import { calculateDiceAndBonus } from '@/utils/DiceCalculator.js'
 import { createAttributeCheckToast } from '@/utils/Toast.js'
 
 const props = defineProps({
   hero: {
     type: Object,
     required: true,
-  },
+  }
 })
-/**
- * @typedef {import('@/models/Hero.js').Hero} Hero
- */
-/**
- * @type Hero
- */
 const hero = props.hero
 const { t } = useI18n()
 
@@ -24,34 +18,19 @@ const attributes = computed(() => {
   const attributes = {}
 
   for (const [key, value] of Object.entries(hero.attributes)) {
-    const diceAndBonus = calculateDiceAndBonus(value)
-
-    let notation = ''
-    diceAndBonus.pool.forEach((item) => {
-      if (notation.length > 0) {
-        notation += '+'
-      }
-      switch (item.type) {
-        case 'dice':
-          notation += `${item.count > 1 ? item.count : ''}${t('diceShort')}${item.sides}`
-          break
-        case 'bonus':
-          notation += item.bonus > 0 ? item.bonus : ''
-          break
-      }
-    })
+    const diceBonus = calculateDiceAndBonus(value)
 
     attributes[key] = {
       name: key,
       value: value,
-      dice: diceAndBonus.dice,
-      bonus: diceAndBonus.bonus,
-      pool: diceAndBonus.pool,
-      notation: notation,
+      dice: diceBonus.dice,
+      bonus: diceBonus.bonus,
+      pool: diceBonus.pool,
+      notation: diceBonus.notation,
     }
   }
 
-  return attributes
+  return attributes;
 })
 
 function rollAttribute(attribute) {
@@ -72,19 +51,24 @@ function rollAttribute(attribute) {
           <i class="fas fa-fw fa-dice text-primary"></i>
         </span>
       </button>
-      <input
-        type="number"
-        v-model="attribute.value"
-        class="form-control form-control-sm"
-        disabled
-        readonly
-      />
+      <div class="input-group">
+        <button class="btn btn-outline-primary"
+                @click.prevent="hero.attributes[key] += 5"
+        >
+          +5
+        </button>
+        <input
+          type="number"
+          v-model="hero.attributes[key]"
+          class="form-control form-control-sm"
+        />
+      </div>
       <span>{{ attribute.notation }}</span>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .attributes {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

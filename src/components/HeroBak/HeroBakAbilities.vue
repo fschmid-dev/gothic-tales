@@ -1,15 +1,19 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { attributeColors } from '@/utils/attributeColors.js'
-import { createAbilityCheckToast } from '@/utils/Toast.js'
 import { computed } from 'vue'
 import { calculateDiceAndBonus } from '@/utils/DiceCalculator.js'
+import { attributeColors } from '@/utils/attributeColors.js'
+import { createAbilityCheckToast } from '@/utils/Toast.js'
 
 const props = defineProps({
   hero: {
     type: Object,
     required: true,
   },
+  editMode: {
+    type: Boolean,
+    default: false,
+  }
 })
 /**
  * @typedef {import('@/models/Hero.js').Hero} Hero
@@ -61,13 +65,6 @@ const abilityList = computed(() => {
   return abilityList
 })
 
-const honeLevels = {
-  0: 'honeLevel.beginner',
-  1: 'honeLevel.practiced',
-  2: 'honeLevel.taught',
-  3: 'honeLevel.mastered',
-}
-
 function rollAbility(ability) {
   createAbilityCheckToast(ability)
 }
@@ -92,20 +89,8 @@ function rollAbility(ability) {
       <div class="d-flex flex-row align-items-center gap-2">
         <div class="d-flex flex-column flex-grow-1 justify-content-between gap-1">
           <div class="d-flex justify-content-between align-items-center">
-            <b>{{ t(`abilities.${ability.name}`) }}</b>
-            <div class="col-auto">
-              <select class="form-select form-select-sm" v-model="hero.abilities[index].honeLevel"
-                      :id="`ability_${category}_${index}_honeLevel`"
-                      @click.stop
-              >
-                <option v-for="(honeLevel, key) in honeLevels"
-                        :key="`ability_${category}_${index}_honeLevel_${key}`"
-                        :value="{ key }"
-                >
-                  {{ t(honeLevel) }}
-                </option>
-              </select>
-            </div>
+            <b>{{ ability.name }}</b>
+            <span>{{ ability.value }}</span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <span>
@@ -116,7 +101,6 @@ function rollAbility(ability) {
               <b :style="{ color: attributeColors[ability.attributes[1]] }">
                 {{ t(`attribute.${ability.attributes[1]}Short`) }}
               </b>
-              <span class="ms-2">({{ t('valueDisplay', { value: ability.value }) }})</span>
             </span>
             <span>{{ ability.notation }}</span>
           </div>
