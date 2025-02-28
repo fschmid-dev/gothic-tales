@@ -76,15 +76,20 @@
     "createHeroModal": {
       "title": "Titel",
       "html": "html"
+    },
+    "deleteActionModal": {
+      "title": "\"{name}\"<br>wirklich entfernen?",
+      "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!"
     }
   },
   "honeLevel": {
-    "beginner": "Anfänger",
-    "practiced": "geübt",
-    "taught": "gelehrt",
-    "mastered": "gemeistert"
+    "0": "Anfänger",
+    "1": "geübt",
+    "2": "gelehrt",
+    "3": "gemeistert"
   },
   "new": "Neu",
+  "save": "Speichern",
   "sum": "Summe {sum}",
   "value": "Wert",
   "valueDisplay": "Wert: {value}",

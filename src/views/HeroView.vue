@@ -8,13 +8,14 @@ import { deleteHeroModal } from '@/utils/deleteHeroModal.js'
 import router from '@/router/index.js'
 import HeroAttributes from '@/components/Hero/HeroAttributes.vue'
 import HeroAbilities from '@/components/Hero/HeroAbilities.vue'
+import HeroActions from '@/components/Hero/HeroActions.vue'
 
 const route = useRoute()
 
 const heroStore = useHeroStore()
 const { getHeroById } = storeToRefs(heroStore)
 
-const heroId = ref(+route.params.heroId)
+const heroId = ref(route.params.heroId)
 const hero = computed(() => {
   const hero = getHeroById.value(heroId.value)
   if (!hero) {
@@ -34,8 +35,7 @@ function deleteHero() {
 watch(
   () => route.params.heroId,
   (newHeroId) => {
-    console.warn('route.params.heroId', newHeroId)
-    heroId.value = +newHeroId
+    heroId.value = newHeroId
   },
 )
 </script>
@@ -70,7 +70,7 @@ watch(
         <HeroAbilities :hero="hero" />
       </div>
       <div class="hero__actions">
-        <h2>HeroActions</h2>
+        <HeroActions :hero="hero" />
       </div>
       <div class="hero__talents">
         <h2>HeroTalents</h2>

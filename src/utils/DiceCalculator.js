@@ -2,7 +2,7 @@ import { i18n } from '@/i18n.js'
 
 const { t } = i18n.global
 
-export function calculateDiceAndBonus(value) {
+export function calculateDiceAndBonus(value, abilityHoneLevel = null) {
   const dice = calculateDice(value)
   const bonus = calculateBonus(value)
 
@@ -32,6 +32,40 @@ export function calculateDiceAndBonus(value) {
       notation += '+'
     }
     notation += `${bonus}`
+  }
+
+  switch (abilityHoneLevel) {
+    case 1:
+      pool.push({
+        type: 'bonus',
+        bonus: 2
+      })
+      notation += '+2'
+      break
+    case 2:
+      pool.push({
+        type: 'dice',
+        sides: 4,
+        count: 1
+      })
+      pool.push({
+        type: 'bonus',
+        bonus: 2
+      })
+      notation += `${t('diceShort')}4+2`
+      break
+    case 3:
+      pool.push({
+        type: 'dice',
+        sides: 6,
+        count: 2
+      })
+      pool.push({
+        type: 'bonus',
+        bonus: 3
+      })
+      notation += `2${t('diceShort')}6+3`
+      break
   }
 
   return {

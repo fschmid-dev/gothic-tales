@@ -28,7 +28,7 @@ const abilityList = computed(() => {
     const attributeB = hero.attributes[ability.attributes[1]]
 
     const abilityValue = Math.floor((attributeA + attributeB) / 2)
-    const diceAndBonus = calculateDiceAndBonus(abilityValue)
+    const diceAndBonus = calculateDiceAndBonus(abilityValue, ability.honeLevel)
 
     let notation = ''
     diceAndBonus.pool.forEach((item) => {
@@ -61,11 +61,8 @@ const abilityList = computed(() => {
   return abilityList
 })
 
-const honeLevels = {
-  0: 'honeLevel.beginner',
-  1: 'honeLevel.practiced',
-  2: 'honeLevel.taught',
-  3: 'honeLevel.mastered',
+function updateHoneLevel($event, ability) {
+  hero.abilities.find((item) => item.name === ability.name).honeLevel = +$event.target.value
 }
 
 function rollAbility(ability) {
@@ -94,15 +91,19 @@ function rollAbility(ability) {
           <div class="d-flex justify-content-between align-items-center">
             <b>{{ t(`abilities.${ability.name}`) }}</b>
             <div class="col-auto">
-              <select class="form-select form-select-sm" v-model="hero.abilities[index].honeLevel"
-                      :id="`ability_${category}_${index}_honeLevel`"
-                      @click.stop
+              <select
+                class="form-select form-select-sm"
+                :id="`ability_${category}_${index}_honeLevel`"
+                @click.stop
+                @change="updateHoneLevel($event, ability)"
               >
-                <option v-for="(honeLevel, key) in honeLevels"
-                        :key="`ability_${category}_${index}_honeLevel_${key}`"
-                        :value="{ key }"
+                <option
+                  v-for="(n, i) in 4"
+                  :key="`ability_${category}_${index}_honeLevel_${i}`"
+                  :value="i"
+                  :selected="+i === +ability.honeLevel"
                 >
-                  {{ t(honeLevel) }}
+                  {{ t(`honeLevel.${i}`) }}
                 </option>
               </select>
             </div>

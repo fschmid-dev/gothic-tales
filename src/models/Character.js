@@ -12,7 +12,7 @@ export class Character {
   abilities = []
 
   constructor(name, attributes = null, abilities = null) {
-    this.id = Date.now()
+    this.id = Math.random().toString(36).substring(2, 15)
     this.name = name
 
     if (attributes) {

@@ -2,6 +2,7 @@ import { rollCheck } from '@/utils/DiceRoller.js'
 import { attributeColors } from '@/utils/attributeColors.js'
 import { i18n } from '@/i18n.js'
 import Toastify from 'toastify-js'
+
 const { t } = i18n.global
 
 export function createAttributeCheckToast(attribute) {
@@ -10,8 +11,8 @@ export function createAttributeCheckToast(attribute) {
   const header = `<b style="color: ${attributeColors[attribute.name]}">${t('attribute.' + attribute.name)}</b>`
   const partsHtml = result.parts
     .map((part) => {
-      let dice = '';
-      let rolls = '';
+      let dice = ''
+      let rolls = ''
 
       switch (part.item.type) {
         case 'dice':
@@ -35,19 +36,26 @@ export function createAttributeCheckToast(attribute) {
     ${sum}
   </div>`
 
-  showToast(html, {}, {
-    borderColor:  attributeColors[attribute.name]
-  })
+  showToast(
+    html,
+    {},
+    {
+      borderColor: attributeColors[attribute.name],
+    },
+  )
 }
 
 export function createAbilityCheckToast(ability) {
-  const result = rollCheck(ability.pool);
+  const result = rollCheck(ability.pool)
 
-  const header = `<b>${ability.name}</b>`
+  let header = `<b>${t(`abilities.${ability.name}`)}</b>`
+  if (ability.honeLevel) {
+    header = `<span>${header} (${t('honeLevel.' + ability.honeLevel)})</span>`
+  }
   const partsHtml = result.parts
     .map((part) => {
-      let dice = '';
-      let rolls = '';
+      let dice = ''
+      let rolls = ''
 
       switch (part.item.type) {
         case 'dice':
@@ -74,12 +82,16 @@ export function createAbilityCheckToast(ability) {
   const colorA = attributeColors[ability.attributes[0]]
   const colorB = attributeColors[ability.attributes[1]]
 
-  showToast(html, {}, {
-    borderTopColor: colorA,
-    borderLeftColor: colorA,
-    borderRightColor: colorB,
-    borderBottomColor: colorB,
-  })
+  showToast(
+    html,
+    {},
+    {
+      borderTopColor: colorA,
+      borderLeftColor: colorA,
+      borderRightColor: colorB,
+      borderBottomColor: colorB,
+    },
+  )
 }
 
 export function createActionToast(action) {
@@ -108,7 +120,7 @@ export function showToast(html, options = {}, style = {}) {
     style: {
       ...defaultStyle,
       ...style,
-    }
+    },
   }
 
   const toast = Toastify(config).showToast()
