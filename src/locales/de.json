@@ -17,6 +17,7 @@
     "remembering/reflection/research": "Erinnern/Erwägen/Erforschen",
     "magicSense": "Magiegespür"
   },
+  "attackRoll": "Angriffswurf",
   "attribute": {
     "concentration": "Konzentration",
     "concentrationShort": "Konz",
@@ -48,6 +49,7 @@
     }
   },
   "close": "Schließen",
+  "damageRoll": "Schadenswurf",
   "delete": "Löschen",
   "deleteHero": {
     "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
@@ -90,7 +92,7 @@
   },
   "new": "Neu",
   "save": "Speichern",
-  "sum": "Summe {sum}",
+  "sum": "Summe: {sum}",
   "value": "Wert",
   "valueDisplay": "Wert: {value}",
   "Weapons & Actions": "Waffen & Aktionen"

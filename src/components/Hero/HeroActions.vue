@@ -10,8 +10,8 @@ import { heroAttributes } from '@/utils/HeroFactory.js'
 const props = defineProps({
   hero: {
     type: Object,
-    required: true,
-  },
+    required: true
+  }
 })
 /**
  * @typedef {import('@/models/Hero.js').Hero} Hero
@@ -32,14 +32,14 @@ const actions = ref([
       {
         type: 'dice',
         sides: 6,
-        count: 2,
+        count: 2
       },
       {
         type: 'bonus',
-        value: 2,
-      },
+        bonus: 2
+      }
     ],
-    notation: '2W6+2',
+    notation: '2W6+2'
   },
   {
     id: '2',
@@ -50,20 +50,20 @@ const actions = ref([
       {
         type: 'dice',
         sides: 8,
-        count: 1,
+        count: 1
       },
       {
         type: 'dice',
         sides: 6,
-        count: 1,
+        count: 1
       },
       {
         type: 'bonus',
-        value: 2,
-      },
+        bonus: 2
+      }
     ],
-    notation: 'W8+W6+W4+2',
-  },
+    notation: 'W8+W6+W4+2'
+  }
 ])
 
 const attributeNotations = computed(() => {
@@ -94,7 +94,7 @@ const attributeNotations = computed(() => {
 })
 
 function rollAction(action) {
-  createActionToast(action)
+  createActionToast(action, hero.attributes[action.attribute])
 }
 
 function newAction() {
@@ -106,7 +106,7 @@ function newAction() {
     tags: [],
     attribute: 'strength',
     damage: [],
-    notation: `1${shortDice}4`,
+    notation: `1${shortDice}4`
   }
 
   openActionModal(action)
@@ -116,7 +116,7 @@ function isDamageNotationValid(notation) {
   const shortDice = t('diceShort')
   const regex = new RegExp(
     `^([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)*$`,
-    'i',
+    'i'
   )
   return regex.test(notation)
 }
@@ -134,12 +134,12 @@ function parseDamageNotation(notation) {
       return {
         type: 'dice',
         count: diceMatch[1] ? parseInt(diceMatch[1], 10) : 1,
-        sides: parseInt(diceMatch[2], 10),
+        sides: parseInt(diceMatch[2], 10)
       }
     } else {
       return {
         type: 'bonus',
-        value: parseInt(part, 10),
+        bonus: parseInt(part, 10)
       }
     }
   })
@@ -190,7 +190,7 @@ function openActionModal(action) {
 
       if (!isDamageNotationValid(notation)) {
         Swal.showValidationMessage(
-          'Ungültige Schaden-Notation. Bitte das Format "xWy+z" verwenden.',
+          'Ungültige Schaden-Notation. Bitte das Format "xWy+z" verwenden.'
         )
         return false
       }
@@ -202,9 +202,9 @@ function openActionModal(action) {
         tags,
         attribute,
         notation,
-        damage: damagePool,
+        damage: damagePool
       }
-    },
+    }
   }).then((result) => {
     if (result.isConfirmed) {
       const updatedAction = { ...action, ...result.value }
@@ -244,7 +244,7 @@ function deleteAction(action) {
         timer: 2000,
         timerProgressBar: true,
         confirmButtonText: t('close'),
-        confirmButtonColor: 'var(--bs-primary)',
+        confirmButtonColor: 'var(--bs-primary)'
       })
     }
   })
