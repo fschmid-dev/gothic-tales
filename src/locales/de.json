@@ -51,6 +51,14 @@
   "close": "Schließen",
   "damageRoll": "Schadenswurf",
   "delete": "Löschen",
+  "deleteActionModal": {
+    "title": "\"{name}\"<br>wirklich entfernen?",
+    "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
+    "deletedModal": {
+      "title": "\"{name}\"<br>wurde gelöscht",
+      "text": "War sowieso Schrott."
+    }
+  },
   "deleteHero": {
     "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
     "title": "\"{name}\"<br>wirklich löschen?",
@@ -78,10 +86,6 @@
     "createHeroModal": {
       "title": "Titel",
       "html": "html"
-    },
-    "deleteActionModal": {
-      "title": "\"{name}\"<br>wirklich entfernen?",
-      "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!"
     }
   },
   "honeLevel": {

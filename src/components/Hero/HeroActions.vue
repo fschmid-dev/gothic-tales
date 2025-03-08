@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { attributeColors } from '@/utils/attributeColors.js'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { calculateDiceAndBonus } from '@/utils/DiceCalculator.js'
 import { createActionToast } from '@/utils/Toast.js'
 import Swal from 'sweetalert2'
@@ -21,50 +21,6 @@ const props = defineProps({
  */
 const hero = props.hero
 const { t } = useI18n()
-
-const actions = ref([
-  {
-    id: '1',
-    name: 'Zweihänder',
-    tags: ['long', 'garstig', 'heavy'],
-    attribute: 'strength',
-    damage: [
-      {
-        type: 'dice',
-        sides: 6,
-        count: 2
-      },
-      {
-        type: 'bonus',
-        bonus: 2
-      }
-    ],
-    notation: '2W6+2'
-  },
-  {
-    id: '2',
-    name: 'Bogen',
-    tags: ['reach (8/15)', 'light', 'piercing'],
-    attribute: 'dexterity',
-    damage: [
-      {
-        type: 'dice',
-        sides: 8,
-        count: 1
-      },
-      {
-        type: 'dice',
-        sides: 6,
-        count: 1
-      },
-      {
-        type: 'bonus',
-        bonus: 2
-      }
-    ],
-    notation: 'W8+W6+W4+2'
-  }
-])
 
 const attributeNotations = computed(() => {
   const attributeNotations = {}
@@ -209,18 +165,18 @@ function openActionModal(action) {
     if (result.isConfirmed) {
       const updatedAction = { ...action, ...result.value }
 
-      const index = actions.value.findIndex((item) => item.id === action.id)
+      const index = hero.actions.findIndex((item) => item.id === action.id)
       if (index !== -1) {
-        actions.value[index] = updatedAction
+        hero.actions[index] = updatedAction
       } else {
-        actions.value.push(updatedAction)
+        hero.actions.push(updatedAction)
       }
     }
   })
 }
 
 function deleteAction(action) {
-  const index = actions.value.findIndex((item) => item.id === action.id)
+  const index = hero.actions.findIndex((item) => item.id === action.id)
   if (index === -1) {
     return
   }
@@ -235,10 +191,10 @@ function deleteAction(action) {
     cancelButtonColor: 'var(--bs-danger)',
     cancelButtonText: t('cancel'),
     preConfirm: () => {
-      actions.value.splice(index, 1)
+      hero.actions.splice(index, 1)
 
       Swal.fire({
-        title: t('deleteActionModal.deletedModal.title', { name: hero.name }),
+        title: t('deleteActionModal.deletedModal.title', { name: action.name }),
         html: t('deleteActionModal.deletedModal.text'),
         icon: 'success',
         timer: 2000,
@@ -260,7 +216,7 @@ function deleteAction(action) {
   </div>
   <div class="actions list-group">
     <div
-      v-for="action in actions"
+      v-for="action in hero.actions"
       :key="`weapon_${action.id}`"
       class="actions__action list-group-item list-group-item-action d-flex flex-row gap-2 align-items-center"
       @click="rollAction(action)"

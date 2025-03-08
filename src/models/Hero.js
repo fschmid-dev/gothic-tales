@@ -4,6 +4,7 @@ import { heroAbilities, heroAttributes } from '@/utils/HeroFactory.js'
 export class Hero extends Character {
   level = 1
   learningPoints = 10
+  actions = []
 
   constructor(name, attributes = heroAttributes, abilities = heroAbilities) {
     super(name, attributes, abilities)
