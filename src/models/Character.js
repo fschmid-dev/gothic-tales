@@ -10,6 +10,8 @@ export class Character {
     experience: 1,
   }
   abilities = []
+  maxHitPoints =  0
+  currentHitPoints = 0
 
   constructor(name, attributes = null, abilities = null) {
     this.id = Math.random().toString(36).substring(2, 15)

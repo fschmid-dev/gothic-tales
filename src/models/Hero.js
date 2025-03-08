@@ -5,6 +5,8 @@ export class Hero extends Character {
   level = 1
   learningPoints = 10
   actions = []
+  maxManaPoints = 0
+  currentManaPoints = 0
 
   constructor(name, attributes = heroAttributes, abilities = heroAbilities) {
     super(name, attributes, abilities)

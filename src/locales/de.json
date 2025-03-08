@@ -96,6 +96,7 @@
   },
   "new": "Neu",
   "save": "Speichern",
+  "status": "Status",
   "sum": "Summe: {sum}",
   "value": "Wert",
   "valueDisplay": "Wert: {value}",

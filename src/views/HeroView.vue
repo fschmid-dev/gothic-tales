@@ -9,6 +9,8 @@ import router from '@/router/index.js'
 import HeroAttributes from '@/components/Hero/HeroAttributes.vue'
 import HeroAbilities from '@/components/Hero/HeroAbilities.vue'
 import HeroActions from '@/components/Hero/HeroActions.vue'
+import HeroStats from '@/components/Hero/HeroStats.vue'
+import HeroInfo from '@/components/Hero/HeroInfo.vue'
 
 const route = useRoute()
 
@@ -36,7 +38,7 @@ watch(
   () => route.params.heroId,
   (newHeroId) => {
     heroId.value = newHeroId
-  },
+  }
 )
 </script>
 
@@ -61,10 +63,10 @@ watch(
         <HeroAttributes :hero="hero" />
       </div>
       <div class="hero__stats">
-        <h2>HeroStats</h2>
+        <HeroStats :hero="hero" />
       </div>
       <div class="hero__info">
-        <h2>HeroInfo</h2>
+        <HeroInfo :hero="hero" />
       </div>
       <div class="hero__abilities">
         <HeroAbilities :hero="hero" />
@@ -82,15 +84,16 @@ watch(
 <style lang="scss">
 .hero {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, max-content);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4a, max-content);
   grid-auto-columns: 1fr;
   gap: 0.5rem;
   grid-auto-flow: row;
   grid-template-areas:
-    'Attribute Stats Info'
-    'Abilities Actions Actions'
-    'Abilities Talents Talents';
+    'Attribute Info'
+    'Attribute Stats'
+    'Abilities Actions'
+    'Abilities Talents';
 
   > * h2 {
     text-align: center;
