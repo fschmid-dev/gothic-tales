@@ -3,9 +3,9 @@ import localforage from 'localforage';
 
 localforage
   .setDriver([
+    localforage.INDEXEDDB,
     localforage.LOCALSTORAGE,
-    localforage.INDEXEDDB, // IndexedDB immer noch als Fallback behalten
-    localforage.WEBSQL, // Optional: WebSQL als weiteres Fallback
+    localforage.WEBSQL,
   ])
   .then(() => {
     console.log(
