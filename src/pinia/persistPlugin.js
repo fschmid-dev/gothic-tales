@@ -8,8 +8,8 @@ localforage
     localforage.WEBSQL,
   ])
   .then(() => {
-    console.log(
-      '[PiniaPersistPlugin] LocalForage drivers set: LocalStorage prioritized.'
+    console.debug(
+      '[PiniaPersistPlugin] LocalForage drivers set: IndexedDB prioritized.'
     );
   })
   .catch((err) => {
