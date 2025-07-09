@@ -1,0 +1,138 @@
+{
+  "abilities": {
+    "body": "Körper",
+    "other": "Andere",
+    "senses": "Sinne",
+    "social": "Sozial",
+    "endure": "Durchhalten",
+    "moveObject": "Objekte bewegen",
+    "jumpingClimbing": "Springen/Klettern",
+    "agility": "Gewandtheit",
+    "stealth": "Heimlichkeit",
+    "persuade": "Überreden",
+    "intimidate": "Einschüchtern",
+    "deceive": "Betrügen",
+    "insight": "Menschenkenntnis",
+    "perceive": "Wahrnehmen",
+    "rememberingReflectionResearch": "Erinnern/Erwägen/Erforschen",
+    "magicSense": "Magiegespür"
+  },
+  "action": {
+    "includeAttributeDiceToDamage": "+ Attributswürfel"
+  },
+  "actionModal": {
+    "attributeLabel": "Attribut",
+    "damageLabel": "Schaden",
+    "damagePlaceholder": "1W6",
+    "defaultName": "Volles Pfund aufs Maul!",
+    "editTitle": "\"{name}\"<br>bearbeiten",
+    "includeAttributeDiceToDamageHelp": "Wenn aktiv, wird der Attributswurf (ohne den W20) zum Schaden hinzugefügt.<br>Bei manchen Waffen (z.B. Armbrüsten) oder bei Zaubern muss diese Option eventuell deaktiviert werden.",
+    "includeAttributeDiceToDamageLabel": "Attributswurf zum Schaden hinzufügen?",
+    "invalidDamageNotation": "Ungültige Schaden-Notation. Bitte das Format 'xWy+z' verwenden.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Der Name der Waffe/Aktion",
+    "newTitle": "Neue Waffe/Aktion anlegen",
+    "tagsLabel": "Eigenschaften/Merkmale",
+    "tagsPlaceholder": "Eigenschaften/Merkmale (per Komma getrennt)"
+  },
+  "app": {
+    "name": "Gothic Tales"
+  },
+  "attackRoll": "Angriffswurf",
+  "attackType": {
+    "followUp": "(2W20kl)"
+  },
+  "attribute": {
+    "concentration": "Konzentration",
+    "concentrationShort": "Konz",
+    "dexterity": "Geschicklichkeit",
+    "dexterityShort": "Ge",
+    "intuition": "Intuition",
+    "intuitionShort": "Intu",
+    "endurance": "Ausdauer",
+    "enduranceShort": "Ausd",
+    "experience": "Erfahrung",
+    "experienceShort": "Erf",
+    "strength": "Stärke",
+    "strengthShort": "St"
+  },
+  "back": "Zurück",
+  "cancel": "Abbrechen",
+  "contextMenu": {
+    "normalRoll": "Normaler Wurf",
+    "advantageRoll": "Wurf mit Vorteil",
+    "disadvantageRoll": "Wurf mit Nachteil",
+    "modifierSmall": "Klein ({value})",
+    "modifierMedium": "Mittel ({value})",
+    "modifierLarge": "Groß ({value})",
+    "attackRollOptions": "Angriffsoptionen",
+    "followUpAttack": "Folgeangriff",
+    "rollButton": "Würfeln"
+  },
+  "create": "Erstellen",
+  "createHero": {
+    "defaultValue": "Neuer Held",
+    "html": "Bitte den Namen des Helden eingeben.<br><small><i>Der Namenlose Held ist nicht erlaubt</i> \uD83D\uDE1C</small>",
+    "placeholder": "Name des Helden",
+    "title": "Neuen Held erstellen",
+    "namelessHero": {
+      "name": "Namenlose Held",
+      "html": "Wie gesagt, du bist <b>nicht</b> der Namenlose Held!"
+    }
+  },
+  "close": "Schließen",
+  "damage": "Schaden",
+  "damageRoll": "Schadenswurf",
+  "delete": "Löschen",
+  "deleteAction": {
+    "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
+    "title": "\"{name}\"<br>wirklich löschen?",
+    "deletedModal": {
+      "text": "War sowieso nur Schrott!",
+      "title": "\"{name}\"<br>wurde gelöscht"
+    }
+  },
+  "deleteHero": {
+    "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
+    "title": "\"{name}\"<br>wirklich löschen?",
+    "deletedModal": {
+      "text": "Möge Innos der Seele gnädig sein.",
+      "title": "\"{name}\"<br>wurde gelöscht"
+    }
+  },
+  "diceShort": "W",
+  "error": "Fehler",
+  "hero": {
+    "ability": "Fähigkeit",
+    "abilities": "Fähigkeiten",
+    "attribute": "Attribut",
+    "attributes": "Attribute",
+    "learningPoints": "Lernpunkte",
+    "learningPointsShort": "LP",
+    "level": "Stufe",
+    "weapons&actions": "Waffen & Aktionen"
+  },
+  "heroesList": {
+    "headline": "Liste deiner Helden",
+    "navigateTo": "Zur Heldenliste"
+  },
+  "heroNotFound": {
+    "title": "Held nicht gefunden",
+    "text": "Der angefragte Held existiert nicht oder wurde gelöscht. Sie werden zur Heldenliste weitergeleitet."
+  },
+  "honeLevel": {
+    "level0": "ungeübt",
+    "level1": "geübt",
+    "level2": "gelehrt",
+    "level3": "gemeistert"
+  },
+  "modifier": {
+    "advantage": "Vorteil",
+    "disadvantage": "Nachteil"
+  },
+  "new": "Neu",
+  "save": "Speichern",
+  "status": "Status",
+  "sum": "Summe: {sum}",
+  "valueDisplay": "Wert: {value}"
+}
