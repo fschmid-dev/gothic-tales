@@ -15,7 +15,7 @@ const hero = props.hero;
 </script>
 
 <template>
-  <div class="d-flex flex-row justify-content-between gap-3">
+  <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
     <div class="list-group">
       <div class="list-group-item list-group-item-danger">Trefferpunkte</div>
       <div class="list-group-item">

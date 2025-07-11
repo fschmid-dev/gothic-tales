@@ -19,10 +19,10 @@ const formData = ref({
   name: props.initialAction.name,
   tags: props.initialAction.tags.join(', '), // Tags as a string for the input field
   attribute: props.initialAction.attribute,
-  includeAttributeDiceToDamage:
-    props.initialAction.includeAttributeDiceToDamage,
+  includeAttributeDiceToRoll:
+    props.initialAction.includeAttributeDiceToRoll,
   notation: props.initialAction.notation,
-  damage: props.initialAction.damage,
+  roll: props.initialAction.roll,
 });
 
 // Computed property for attribute options in the select field
@@ -43,9 +43,9 @@ watch(
       name: newAction.name,
       tags: newAction.tags.join(', '),
       attribute: newAction.attribute,
-      includeAttributeDiceToDamage: newAction.includeAttributeDiceToDamage,
+      includeAttributeDiceToRoll: newAction.includeAttributeDiceToRoll,
       notation: newAction.notation,
-      damage: newAction.damage,
+      roll: newAction.roll,
     };
   },
   { deep: true }
@@ -102,40 +102,39 @@ defineExpose({
         t('actionModal.attributeLabel')
       }}</label>
     </div>
-    <div class="mb-3 text-start">
-      <div class="form-check form-switch">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value=""
-          id="action-includeAttributeDiceToDamage"
-          switch
-          :checked="formData.includeAttributeDiceToDamage"
-        />
-        <label
-          class="form-check-label"
-          for="action-includeAttributeDiceToDamage"
-        >
-          {{ $t('actionModal.includeAttributeDiceToDamageLabel') }}
-        </label>
-      </div>
-      <label
-        id="checkIncludeAttributeDiceToDamageHelp"
-        for="action-includeAttributeDiceToDamage"
-        class="form-text"
-        v-html="$t('actionModal.includeAttributeDiceToDamageHelp')"
-      ></label>
-    </div>
-    <div class="form-floating">
+    <div class="form-floating mb-3">
       <input
         type="text"
         class="form-control"
-        id="action-damage"
-        :placeholder="t('actionModal.damagePlaceholder')"
+        id="action-roll"
+        :placeholder="t('actionModal.rollPlaceholder')"
         v-model="formData.notation"
         :value="formData.notation"
       />
-      <label for="action-damage">{{ t('actionModal.damageLabel') }}</label>
+      <label for="action-roll">{{ t('actionModal.rollLabel') }}</label>
+    </div>
+    <div class="text-start">
+      <div class="form-check form-switch">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="action-includeAttributeDiceToRoll"
+            :checked="formData.includeAttributeDiceToRoll"
+        />
+        <label
+            class="form-check-label"
+            for="action-includeAttributeDiceToRoll"
+        >
+          {{ $t('actionModal.includeAttributeDiceToRollLabel') }}
+        </label>
+      </div>
+      <label
+          id="checkIncludeAttributeDiceToRollHelp"
+          for="action-includeAttributeDiceToRoll"
+          class="form-text"
+          v-html="$t('actionModal.includeAttributeDiceToRollHelp')"
+      ></label>
     </div>
   </div>
 </template>

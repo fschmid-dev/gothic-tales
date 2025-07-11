@@ -62,16 +62,15 @@ function incrementAttribute(key) {
   <div class="attributes">
     <div v-for="(attribute, key) in attributes" :key="key" class="attribute">
       <button
-        class="btn d-flex flex-row w-100 gap-2 align-items-center justify-content-between cursor-pointer"
+        class="btn btn-link d-flex flex-row w-100 gap-2 align-items-center text-decoration-none"
         @click.prevent="performAttributeRoll(attribute)"
         @contextmenu="onAttributeRollModify($event, attribute)"
       >
+        <span class="attribute--hover-background" :style="{ backgroundColor: attributeColors[key] }"></span>
+        <font-awesome-icon :icon="['fas', 'fa-dice']" fixed-width class="text-primary"/>
         <b :style="{ color: attributeColors[key] }">
           {{ $t(`attribute.${key}`) }}
         </b>
-        <span>
-          <font-awesome-icon :icon="['fas', 'fa-dice']" fixed-width class="text-primary"/>
-        </span>
       </button>
       <div class="input-group">
         <button
@@ -91,14 +90,3 @@ function incrementAttribute(key) {
     </div>
   </div>
 </template>
-
-<style scoped>
-.attributes {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, max-content);
-  grid-auto-flow: column;
-  text-align: center;
-  gap: 0.5rem;
-}
-</style>

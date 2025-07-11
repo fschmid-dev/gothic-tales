@@ -1,11 +1,11 @@
 import i18n from '@/plugins/i18n.js'; // Import your i18n instance to get 'diceShort'
 
 /**
- * Checks if a given string is a valid damage notation.
+ * Checks if a given string is a valid roll notation.
  * @param {string} notation The notation string to validate (e.g., "1W6+2", "2W8").
  * @returns {boolean} True if valid, false otherwise.
  */
-export function isDamageNotationValid(notation) {
+export function isRollNotationValid(notation) {
   const shortDice = i18n.global.t('diceShort'); // Access global t() for translation
   const regex = new RegExp(
     `^([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)*$`,
@@ -15,11 +15,11 @@ export function isDamageNotationValid(notation) {
 }
 
 /**
- * Parses a damage notation string into a pool of dice and bonus components.
+ * Parses a roll notation string into a pool of dice and bonus components.
  * @param {string} notation The notation string to parse.
  * @returns {Array<object>} An array of objects, each representing a dice roll or a bonus.
  */
-export function parseDamageNotation(notation) {
+export function parseRollNotation(notation) {
   const shortDice = i18n.global.t('diceShort'); // Access global t() for translation
   const regex = new RegExp(`([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)`, 'gi');
   const parts = notation.match(regex);

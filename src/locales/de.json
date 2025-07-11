@@ -18,17 +18,17 @@
     "magicSense": "Magiegespür"
   },
   "action": {
-    "includeAttributeDiceToDamage": "+ Attributswürfel"
+    "includeAttributeDiceToRoll": "+ Attributswürfel"
   },
   "actionModal": {
     "attributeLabel": "Attribut",
-    "damageLabel": "Schaden",
-    "damagePlaceholder": "1W6",
+    "rollLabel": "Wurf",
+    "rollPlaceholder": "1W6",
     "defaultName": "Volles Pfund aufs Maul!",
     "editTitle": "\"{name}\"<br>bearbeiten",
-    "includeAttributeDiceToDamageHelp": "Wenn aktiv, wird der Attributswurf (ohne den W20) zum Schaden hinzugefügt.<br>Bei manchen Waffen (z.B. Armbrüsten) oder bei Zaubern muss diese Option eventuell deaktiviert werden.",
-    "includeAttributeDiceToDamageLabel": "Attributswurf zum Schaden hinzufügen?",
-    "invalidDamageNotation": "Ungültige Schaden-Notation. Bitte das Format 'xWy+z' verwenden.",
+    "includeAttributeDiceToRollHelp": "Wenn aktiv, wird der Attributswurf (ohne den W20) zum Wurf hinzugefügt.",
+    "includeAttributeDiceToRollLabel": "Attributswurf zu dem Wurf hinzufügen?",
+    "invalidRollNotation": "Ungültige Wurf-Notation. Bitte das Format 'xWy+z' verwenden.",
     "nameLabel": "Name",
     "namePlaceholder": "Der Name der Waffe/Aktion",
     "newTitle": "Neue Waffe/Aktion anlegen",
@@ -81,8 +81,7 @@
     }
   },
   "close": "Schließen",
-  "damage": "Schaden",
-  "damageRoll": "Schadenswurf",
+  "roll": "Wurf",
   "delete": "Löschen",
   "deleteAction": {
     "text": "Diese Aktion kann nicht mehr rückgängig gemacht werden!",
@@ -110,6 +109,10 @@
     "learningPoints": "Lernpunkte",
     "learningPointsShort": "LP",
     "level": "Stufe",
+    "name": {
+      "label": "Name des Helden",
+      "placeholder": "Gib hier den Namen deines Helden an"
+    },
     "weapons&actions": "Waffen & Aktionen"
   },
   "heroesList": {

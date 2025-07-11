@@ -1,11 +1,9 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useRoute } from 'vue-router';
-import { useHeroStore } from '@/pinia/hero.store';
-import { useDeleteHeroModal } from '@/composables/useDeleteHeroModal';
+import {computed} from 'vue';
+import {useRoute} from 'vue-router';
+import {useHeroStore} from '@/pinia/hero.store';
+import {useDeleteHeroModal} from '@/composables/useDeleteHeroModal';
 import router from '@/plugins/router';
-import Swal from 'sweetalert2';
 
 import HeroAbilities from '@/components/Hero/HeroAbilities.vue';
 import HeroActions from '@/components/Hero/HeroActions.vue';
@@ -14,10 +12,10 @@ import HeroInfo from '@/components/Hero/HeroInfo.vue';
 import HeroStats from '@/components/Hero/HeroStats.vue';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
-const { t } = useI18n();
+import '@/assets/hero_page.scss'
 
 const route = useRoute();
-const { showDeleteHeroModal } = useDeleteHeroModal();
+const {showDeleteHeroModal} = useDeleteHeroModal();
 const heroStore = useHeroStore();
 
 const heroId = computed(() => route.params.id);
@@ -34,7 +32,7 @@ function deleteHero() {
 
   showDeleteHeroModal(hero.value, () => {
     heroStore.deleteHero(hero.value);
-    router.push({ name: 'heroes.list' });
+    router.push({name: 'heroes.list'});
   });
 }
 
@@ -44,13 +42,10 @@ function updateHeroAttribute(key, newValue) {
 
 function updateHoneLevelUpdate(abilityName, newHoneLevel) {
   const abilityToUpdate = hero.value.abilities.find(
-    (ab) => ab.name === abilityName
+      (ab) => ab.name === abilityName
   );
   if (abilityToUpdate) {
     abilityToUpdate.honeLevel = newHoneLevel;
-    console.log(
-      `Ability ${abilityName} hone level updated to: ${newHoneLevel}`
-    );
   }
 }
 
@@ -60,7 +55,7 @@ function handleAddAction(newAction) {
 
 function handleUpdateAction(updatedAction) {
   const index = hero.value.actions.findIndex(
-    (action) => action.id === updatedAction.id
+      (action) => action.id === updatedAction.id
   );
   if (index !== -1) {
     hero.value.actions[index] = updatedAction;
@@ -69,7 +64,7 @@ function handleUpdateAction(updatedAction) {
 
 function handleDeleteAction(actionId) {
   const index = hero.value.actions.findIndex(
-    (action) => action.id === actionId
+      (action) => action.id === actionId
   );
   if (index !== -1) {
     hero.value.actions.splice(index, 1);
@@ -82,9 +77,9 @@ function handleDeleteAction(actionId) {
     <div class="d-flex flex-row justify-content-between align-items-center">
       <div class="d-flex align-items-center">
         <RouterLink
-          :to="{ name: 'heroes.list' }"
-          class="btn btn-link"
-          title="zurück"
+            :to="{ name: 'heroes.list' }"
+            class="btn btn-link"
+            title="zurück"
         >
           <font-awesome-icon :icon="['fas', 'fa-chevron-left']" fixed-width/>
         </RouterLink>
@@ -96,29 +91,29 @@ function handleDeleteAction(actionId) {
         </button>
       </div>
     </div>
-    <hr />
+    <hr/>
     <div class="hero">
       <div class="hero__info">
-        <HeroInfo :hero="hero" />
-      </div>
-      <div class="hero__attribute">
-        <HeroAttributes :hero="hero" @update:attribute="updateHeroAttribute" />
+        <HeroInfo :hero="hero"/>
       </div>
       <div class="hero__stats">
-        <HeroStats :hero="hero" />
+        <HeroStats :hero="hero"/>
+      </div>
+      <div class="hero__attributes">
+        <HeroAttributes :hero="hero" @update:attribute="updateHeroAttribute"/>
       </div>
       <div class="hero__abilities">
         <HeroAbilities
-          :hero="hero"
-          @update:ability-hone-level="updateHoneLevelUpdate"
+            :hero="hero"
+            @update:ability-hone-level="updateHoneLevelUpdate"
         />
       </div>
       <div class="hero__actions">
         <HeroActions
-          :hero="hero"
-          @add:action="handleAddAction"
-          @update:action="handleUpdateAction"
-          @delete:action="handleDeleteAction"
+            :hero="hero"
+            @add:action="handleAddAction"
+            @update:action="handleUpdateAction"
+            @delete:action="handleDeleteAction"
         />
       </div>
       <div class="hero__talents"></div>
@@ -128,7 +123,7 @@ function handleDeleteAction(actionId) {
     <div class="alert alert-warning">
       <h1>{{ $t('heroNotFound.title') }}</h1>
       <span>
-        {{ $t('heroNotFound.text') }}<br />
+        {{ $t('heroNotFound.text') }}<br/>
         <RouterLink class="alert-link" :to="{ name: 'heroes.list' }">
           {{ $t('heroesList.navigateTo') }}
         </RouterLink>
@@ -136,53 +131,3 @@ function handleDeleteAction(actionId) {
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.hero {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, max-content);
-  grid-auto-columns: 1fr;
-  gap: 0.5rem;
-  grid-auto-flow: row;
-  grid-template-areas:
-    'Attribute Info'
-    'Attribute Stats'
-    'Abilities Actions'
-    'Abilities Talents';
-
-  > div {
-    border: 1px solid var(--bs-dark);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-  }
-
-  > * h2 {
-    text-align: center;
-  }
-
-  &__attribute {
-    grid-area: Attribute;
-  }
-
-  &__stats {
-    grid-area: Stats;
-  }
-
-  &__info {
-    grid-area: Info;
-  }
-
-  &__abilities {
-    grid-area: Abilities;
-  }
-
-  &__actions {
-    grid-area: Actions;
-  }
-
-  &__talents {
-    grid-area: Talents;
-  }
-}
-</style>

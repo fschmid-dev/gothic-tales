@@ -26,9 +26,10 @@ function saveHero(heroToSave) {
 </script>
 
 <template>
-  <div class="d-flex flex-column gap-2">
-    <div class="d-flex flex-row">
-      <input type="text" class="form-control" @input="updateHeroName"/>
+  <div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="hero:name" :placeholder="$t('hero.name.placeholder')" @input="updateHeroName"/>
+      <label for="hero:name">{{ $t('hero.name.label')}}</label>
     </div>
   </div>
 </template>

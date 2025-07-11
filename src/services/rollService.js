@@ -128,8 +128,8 @@ export function createAbilityCheck(ability, modifierOptions) {
 }
 
 /**
- * Creates and displays a toast for an Action (e.g., Attack, Damage).
- * @param {object} action The action object (e.g., { name: '...', damage: [], attribute: '...' }).
+ * Creates and displays a toast for an Action (e.g., Attack, Roll).
+ * @param {object} action The action object (e.g., { name: '...', roll: [], attribute: '...' }).
  * @param {number} attributeValue
  * @param {object} modifierOptions
  */
@@ -152,7 +152,10 @@ export function createAction(action, attributeValue, modifierOptions) {
 
     // --- Attribute Check Roll (including numerical modifiers: small/medium/large advantage/disadvantage) ---
     let attributeDicePool = attributeDiceAndBonus.pool.slice();
-    if (modifierOptions.rollType !== 'normal' && modifierOptions.modifierValue !== 0) {
+    if (
+        modifierOptions.rollType && modifierOptions.rollType !== 'normal'
+        && modifierOptions.modifierValue && modifierOptions.modifierValue !== 0
+    ) {
         attributeDicePool.push({
             type: modifierOptions.rollType,
             value: modifierOptions.modifierValue
@@ -164,16 +167,16 @@ export function createAction(action, attributeValue, modifierOptions) {
     // --- Calculate To-Hit Sum ---
     const toHitSum = d20Roll + attributeCheckResult.sum;
 
-    // --- Calculate Damage Sum ---
-    const damageRollResult = rollPool(action.damage);
+    // --- Calculate Roll Sum ---
+    const rollResult = rollPool(action.roll);
 
-    let damageSum;
-    if (action.includeAttributeDiceToDamage) {
-        // Add attribute check's sum to damage roll (common for weapons)
-        damageSum = attributeCheckResult.sum + damageRollResult.sum;
+    let rollSum;
+    if (action.includeAttributeDiceToRoll) {
+        // Add attribute check's sum to roll (common for weapons)
+        rollSum = attributeCheckResult.sum + rollResult.sum;
     } else {
-        // Damage is calculated only by action.damage (e.g., crossbow, spells)
-        damageSum = damageRollResult.sum;
+        // Roll is calculated only by action.roll (e.g., crossbow, spells)
+        rollSum = rollResult.sum;
     }
 
     const header = `<b>${action.name}</b>`;
@@ -204,26 +207,26 @@ export function createAction(action, attributeValue, modifierOptions) {
     };
 
 
-    // --- Damage Section Parts for UI ---
-    let damageParts;
-    if (action.includeAttributeDiceToDamage) {
-        damageParts = [
-            ...attributeCheckResult.parts, // Attribute parts are often reused for damage
-            ...damageRollResult.parts,     // The action's damage dice/bonus
+    // --- Roll Section Parts for UI ---
+    let rollParts;
+    if (action.includeAttributeDiceToRoll) {
+        rollParts = [
+            ...attributeCheckResult.parts, // Attribute parts are often reused for roll
+            ...rollResult.parts,     // The action's roll dice/bonus
         ];
     } else {
-        damageParts = [
-            ...damageRollResult.parts, // Only the action's damage dice/bonus
+        rollParts = [
+            ...rollResult.parts, // Only the action's roll dice/bonus
         ];
     }
 
-    const damageSection = {
-        title: t('damageRoll'),
-        parts: damageParts,
-        sum: damageSum,
+    const rollSection = {
+        title: t('roll'),
+        parts: rollParts,
+        sum: rollSum,
     };
 
-    const sections = [toHitSection, damageSection];
+    const sections = [toHitSection, rollSection];
 
     const html = renderVueComponentToHTML(DiceRollToastContent, {
         header,

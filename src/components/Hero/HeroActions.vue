@@ -11,7 +11,7 @@ import {heroAttributes} from '@/models/Hero.js'; // Import the Hero class
 import {createAction} from '@/services/rollService.js';
 import {renderVueComponentToHTML} from '@/utils/vueRender.js';
 import ActionEditForm from '@/components/ActionEditForm.vue';
-import {isDamageNotationValid, parseDamageNotation,} from '@/utils/notationParser.js';
+import {isRollNotationValid, parseRollNotation,} from '@/utils/notationParser.js';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 /**
@@ -57,8 +57,8 @@ function newAction() {
     name: t('actionModal.defaultName'),
     tags: [],
     attribute: Object.keys(heroAttributes)[0],
-    includeAttributeDiceToDamage: true,
-    damage: [],
+    includeAttributeDiceToRoll: true,
+    roll: [],
     notation: `1${t('diceShort')}4`,
   };
 
@@ -93,25 +93,25 @@ function openActionModal(action, newAction = false) {
           .map((tag) => tag.trim())
           .filter((tag) => tag !== '');
       const attribute = document.getElementById('action-attribute').value;
-      const includeAttributeDiceToDamage = document.getElementById(
-          'action-includeAttributeDiceToDamage'
+      const includeAttributeDiceToRoll = document.getElementById(
+          'action-includeAttributeDiceToRoll'
       ).checked;
-      const notation = document.getElementById('action-damage').value;
+      const notation = document.getElementById('action-roll').value;
 
-      if (!isDamageNotationValid(notation)) {
-        Swal.showValidationMessage(t('actionModal.invalidDamageNotation'));
+      if (!isRollNotationValid(notation)) {
+        Swal.showValidationMessage(t('actionModal.invalidRollNotation'));
         return false;
       }
 
-      const damagePool = parseDamageNotation(notation);
+      const rollPool = parseRollNotation(notation);
 
       return {
         name,
         tags,
         attribute,
-        includeAttributeDiceToDamage,
+        includeAttributeDiceToRoll,
         notation,
-        damage: damagePool,
+        roll: rollPool,
       };
     },
   }).then((result) => {
@@ -172,22 +172,23 @@ function deleteAction(actionToDelete) {
       <font-awesome-icon :icon="['fas', 'fa-plus']" fixed-width/>
     </button>
   </div>
-  <div class="actions list-group">
+  <div class="list-group">
     <div
         v-for="action in hero.actions"
         :key="`weapon_${action.id}`"
-        class="actions__action list-group-item list-group-item-action d-flex flex-row gap-2 align-items-center"
+        class="action"
         @click="performActionRoll(action)"
         @contextmenu="onActionModify($event, action)"
     >
-      <div class="flex-grow-0">
+      <div class="action__name">
         <font-awesome-icon :icon="['fas', 'fa-dice']" fixed-width class="text-primary"/>
+        <h3>{{ action.name }}</h3>
       </div>
-      <div class="d-flex flex-column flex-grow-1">
-        <h3 class="mb-2">{{ action.name }}</h3>
+
+      <div class="action__tags">
         <div
             v-if="action.tags && action.tags.length > 0"
-            class="d-flex gap-2 mb-2"
+            class="d-flex flex-wrap gap-2"
         >
           <span
               class="badge rounded-pill text-bg-dark"
@@ -197,23 +198,30 @@ function deleteAction(actionToDelete) {
             {{ tag }}
           </span>
         </div>
-        <div>
-          <div class="d-flex flex-row align-items-center gap-2">
-            <b :style="{ color: attributeColors[action.attribute] }">
-              {{ t(`attribute.${action.attribute}Short`) }}
-            </b>
-            <span>{{ attributeNotations[action.attribute] }}</span>
-          </div>
-        </div>
+      </div>
+
+      <div class="action__attribute">
         <div class="d-flex flex-row align-items-center gap-2">
-          <b>{{ t('damage') }}</b>
-          <span>{{ action.notation }}</span>
-          <span v-if="action.includeAttributeDiceToDamage">
-            {{ $t('action.includeAttributeDiceToDamage') }}
+          <b :style="{ color: attributeColors[action.attribute] }">
+            {{ t(`attribute.${action.attribute}Short`) }}
+          </b>
+          <span>{{ attributeNotations[action.attribute] }}</span>
+        </div>
+      </div>
+
+      <div class="action__roll">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-row gap-2">
+            <b>{{ t('roll') }}</b>
+            <span>{{ action.notation }}</span>
+          </div>
+          <span v-if="action.includeAttributeDiceToRoll">
+            {{ $t('action.includeAttributeDiceToRoll') }}
           </span>
         </div>
       </div>
-      <div class="btn-group-vertical">
+
+      <div class="action__buttons">
         <button class="btn btn-dark" @click.stop="openActionModal(action)">
           <font-awesome-icon :icon="['fas', 'fa-edit']" fixed-width/>
         </button>
@@ -224,11 +232,3 @@ function deleteAction(actionToDelete) {
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.actions {
-  &__action {
-    cursor: pointer;
-  }
-}
-</style>

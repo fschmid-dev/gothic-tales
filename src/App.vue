@@ -6,10 +6,8 @@ import ContextMenu from '@/components/ContextMenu.vue';
 
 const route = useRoute();
 
-const mainContainerClass = computed(() => {
-  return route.meta.mainClass || 'container';
-});
-
+const currentMainContainerClass = ref('container');
+const nextMainContainerClass = computed(() => route.meta.mainClass || 'container');
 const transitionName = ref('fade-left');
 
 watch(
@@ -25,6 +23,10 @@ watch(
     }
   }
 );
+
+function updateMainContainerClass() {
+    currentMainContainerClass.value = nextMainContainerClass.value;
+}
 </script>
 
 <template>
@@ -32,8 +34,13 @@ watch(
   <ContextMenu />
 
   <RouterView v-slot="{ Component }">
-    <main class="my-3" :class="mainContainerClass">
-      <Transition :name="transitionName" mode="out-in">
+    <main class="my-3" :class="currentMainContainerClass">
+      <Transition
+          :name="transitionName"
+          mode="out-in"
+          @after-leave="updateMainContainerClass"
+          @before-enter="updateMainContainerClass"
+      >
         <Component :is="Component" />
       </Transition>
     </main>
@@ -41,6 +48,14 @@ watch(
 </template>
 
 <style lang="scss">
+:root {
+  --fade-transition-distance: 5rem;
+  
+  @media (prefers-reduced-motion) {
+    --fade-transition-distance: .5rem;
+  }
+}
+
 /* Fade von rechts rein (Standard-Verhalten) */
 .fade-left-enter-active {
   transition: all 0.3s ease-out;
@@ -51,12 +66,13 @@ watch(
 }
 
 .fade-left-leave-to {
-  transform: translateX(-20px);
+  //noinspection CssInvalidFunction
+  transform: translateX(calc(var(--fade-transition-distance) * -1));
   opacity: 0;
 }
 
 .fade-left-enter-from {
-  transform: translateX(20px);
+  transform: translateX(var(--fade-transition-distance));
   opacity: 0;
 }
 
@@ -70,12 +86,13 @@ watch(
 }
 
 .fade-right-leave-to {
-  transform: translateX(20px); // Geht nach rechts raus
+  transform: translateX(var(--fade-transition-distance));
   opacity: 0;
 }
 
 .fade-right-enter-from {
-  transform: translateX(-20px); // Kommt von links rein
+  //noinspection CssInvalidFunction
+  transform: translateX(calc(var(--fade-transition-distance) * -1));
   opacity: 0;
 }
 
