@@ -8,20 +8,17 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(["update:name"]);
+
 const heroStore = useHeroStore();
 
 function updateHeroName($event) {
-  const newName = $event.target.value.trim();
-  if (!newName) {
+  const newName = $event.target.value;
+  if (!newName.trim()) {
     return;
   }
-  const heroToSave = JSON.parse(JSON.stringify(props.hero));
-  heroToSave.name = newName;
-  saveHero(heroToSave);
-}
 
-function saveHero(heroToSave) {
-  heroStore.saveHero(heroToSave);
+  emits("update:name", newName.trim());
 }
 </script>
 
@@ -33,6 +30,7 @@ function saveHero(heroToSave) {
         class="form-control"
         id="hero:name"
         :placeholder="$t('hero.name.placeholder')"
+        :value="hero.name"
         @input="updateHeroName"
       />
       <label for="hero:name">{{ $t("hero.name.label") }}</label>

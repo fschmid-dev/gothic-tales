@@ -36,6 +36,14 @@ function deleteHero() {
   });
 }
 
+function updateHeroName(name) {
+  if (!name) {
+    return;
+  }
+
+  hero.value.name = name;
+}
+
 function updateHeroAttribute(key, newValue) {
   hero.value.attributes[key] = Number(newValue);
 }
@@ -94,7 +102,7 @@ function handleDeleteAction(actionId) {
     <hr />
     <div class="hero">
       <div class="hero__info">
-        <HeroInfo :hero="hero" />
+        <HeroInfo :hero="hero" @update:name="updateHeroName" />
       </div>
       <div class="hero__stats">
         <HeroStats :hero="hero" />
