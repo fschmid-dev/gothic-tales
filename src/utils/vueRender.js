@@ -1,5 +1,5 @@
-import { createApp, h } from 'vue';
-import i18n from '@/plugins/i18n.js';
+import { createApp, h } from "vue";
+import i18n from "@/plugins/i18n.js";
 
 /**
  * Renders a Vue component into a temporary DOM element and returns its HTML string.
@@ -12,7 +12,7 @@ import i18n from '@/plugins/i18n.js';
  * @returns {string} The HTML string of the rendered component.
  */
 export function renderVueComponentToHTML(component, props = {}) {
-  const container = document.createElement('div');
+  const container = document.createElement("div");
   const app = createApp({
     render: () => h(component, props),
   });

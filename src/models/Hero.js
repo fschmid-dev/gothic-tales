@@ -1,4 +1,4 @@
-import { Character } from '@/models/Character.js';
+import { Character } from "@/models/Character.js";
 
 /**
  * @typedef {object} HeroAttributes
@@ -28,78 +28,78 @@ export const heroAttributes = {
 export const heroAbilities = [
   // Body-Abilities
   {
-    name: 'endure',
-    attributes: ['concentration', 'endurance'],
+    name: "endure",
+    attributes: ["concentration", "endurance"],
     honeLevel: 0,
-    category: 'body',
+    category: "body",
   },
   {
-    name: 'moveObject',
-    attributes: ['strength', 'endurance'],
+    name: "moveObject",
+    attributes: ["strength", "endurance"],
     honeLevel: 0,
-    category: 'body',
+    category: "body",
   },
   {
-    name: 'jumpingClimbing',
-    attributes: ['strength', 'dexterity'],
+    name: "jumpingClimbing",
+    attributes: ["strength", "dexterity"],
     honeLevel: 0,
-    category: 'body',
+    category: "body",
   },
   {
-    name: 'agility',
-    attributes: ['dexterity', 'experience'],
+    name: "agility",
+    attributes: ["dexterity", "experience"],
     honeLevel: 0,
-    category: 'body',
+    category: "body",
   },
   {
-    name: 'stealth',
-    attributes: ['dexterity', 'intuition'],
+    name: "stealth",
+    attributes: ["dexterity", "intuition"],
     honeLevel: 0,
-    category: 'body',
+    category: "body",
   },
   // Social-Abilities
   {
-    name: 'persuade',
-    attributes: ['concentration', 'intuition'],
+    name: "persuade",
+    attributes: ["concentration", "intuition"],
     honeLevel: 0,
-    category: 'social',
+    category: "social",
   },
   {
-    name: 'intimidate',
-    attributes: ['concentration', 'strength'],
+    name: "intimidate",
+    attributes: ["concentration", "strength"],
     honeLevel: 0,
-    category: 'social',
+    category: "social",
   },
   {
-    name: 'deceive',
-    attributes: ['dexterity', 'intuition'],
+    name: "deceive",
+    attributes: ["dexterity", "intuition"],
     honeLevel: 0,
-    category: 'social',
+    category: "social",
   },
   {
-    name: 'insight',
-    attributes: ['intuition', 'experience'],
+    name: "insight",
+    attributes: ["intuition", "experience"],
     honeLevel: 0,
-    category: 'social',
+    category: "social",
   },
   // Senses-Abilities
   {
-    name: 'perceive',
-    attributes: ['strength', 'endurance'],
+    name: "perceive",
+    attributes: ["strength", "endurance"],
     honeLevel: 0,
-    category: 'senses',
+    category: "senses",
   },
   {
-    name: 'rememberingReflectionResearch',
-    attributes: ['intuition', 'experience'],
+    name: "rememberingReflectionResearch",
+    attributes: ["intuition", "experience"],
     honeLevel: 0,
-    category: 'senses',
+    category: "senses",
   },
   {
-    name: 'magicSense',
-    attributes: ['concentration', 'experience'],
+    name: "magicSense",
+    attributes: ["concentration", "experience"],
     honeLevel: 0,
-    category: 'senses',
+    category: "senses",
   },
 ];
 

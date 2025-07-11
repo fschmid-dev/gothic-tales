@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
@@ -8,13 +8,13 @@ const props = defineProps({
   header: {
     type: String,
     required: false,
-    default: '',
+    default: "",
   },
   // Color for the header text (mostly the attribute color)
   headerColor: {
     type: String,
     required: false,
-    default: 'inherit',
+    default: "inherit",
   },
   // Array of sections, each representing a distinct roll group
   sections: {
@@ -37,7 +37,7 @@ const props = defineProps({
   footer: {
     type: String,
     required: false,
-    default: '',
+    default: "",
   },
 });
 </script>
@@ -69,10 +69,10 @@ const props = defineProps({
           <div class="d-flex flex-column align-items-center toast-roll-part">
             <template v-if="part.item.type === 'dice'">
               <span class="toast-dice-notation">
-                {{ part.item.count > 1 ? part.item.count : ''
-                }}{{ t('diceShort') }}{{ part.item.sides }}
+                {{ part.item.count > 1 ? part.item.count : ""
+                }}{{ t("diceShort") }}{{ part.item.sides }}
               </span>
-              <span class="toast-roll-values">{{ part.rolls.join('+') }}</span>
+              <span class="toast-roll-values">{{ part.rolls.join("+") }}</span>
             </template>
 
             <template v-if="part.item.type === 'd20special'">
@@ -80,7 +80,13 @@ const props = defineProps({
                 {{ t(part.label) }}
               </span>
               <span class="toast-roll-values">
-                (<span :class="{'toast-roll-selected': part.item.selected === 0}">{{ part.item.rolls[0] }}</span>/<span :class="{'toast-roll-selected': part.item.selected === 1}">{{ part.item.rolls[1] }}</span>)
+                (<span
+                  :class="{ 'toast-roll-selected': part.item.selected === 0 }"
+                  >{{ part.item.rolls[0] }}</span
+                >/<span
+                  :class="{ 'toast-roll-selected': part.item.selected === 1 }"
+                  >{{ part.item.rolls[1] }}</span
+                >)
               </span>
             </template>
 
@@ -89,7 +95,12 @@ const props = defineProps({
               <span class="toast-bonus-value">{{ part.sum }}</span>
             </template>
 
-            <template v-else-if="part.item.type === 'advantage' || part.item.type === 'disadvantage'">
+            <template
+              v-else-if="
+                part.item.type === 'advantage' ||
+                part.item.type === 'disadvantage'
+              "
+            >
               <span class="toast-modifier-notation">
                 {{ t(`modifier.${part.item.type}`) }}
               </span>
@@ -105,7 +116,7 @@ const props = defineProps({
         </template>
         <template v-if="section.sum">
           <b class="text-end toast-section-sum">
-            {{ t('sum', { sum: section.sum }) }}
+            {{ t("sum", { sum: section.sum }) }}
           </b>
         </template>
       </div>
@@ -113,7 +124,7 @@ const props = defineProps({
 
     <template v-if="sum">
       <hr class="toast-divider" />
-      <b class="text-end toast-section-sum">{{ t('sum', { sum: sum }) }}</b>
+      <b class="text-end toast-section-sum">{{ t("sum", { sum: sum }) }}</b>
     </template>
 
     <div v-if="footer" class="toast-footer-text">
@@ -142,7 +153,7 @@ const props = defineProps({
 
 .toast-dice-notation,
 .toast-bonus-notation,
-.toast-modifier-notation{
+.toast-modifier-notation {
   font-style: italic;
   font-weight: bold;
   color: var(--bs-primary);
@@ -150,10 +161,10 @@ const props = defineProps({
 
 .toast-roll-values,
 .toast-bonus-value,
-.toast-modifier-value{
+.toast-modifier-value {
   color: var(--bs-secondary);
 }
-.toast-roll-selected{
+.toast-roll-selected {
   font-weight: bold;
 }
 

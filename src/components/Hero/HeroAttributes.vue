@@ -1,10 +1,10 @@
 <script setup>
-import { computed } from 'vue';
-import { attributeColors } from '@/utils/attributeColors.js';
-import { calculateDiceAndBonus } from '@/utils/diceCalculator.js';
-import { createAttributeCheck } from '@/services/rollService.js';
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {useRollContextMenu} from "@/composables/useRollContextMenu";
+import { computed } from "vue";
+import { attributeColors } from "@/utils/attributeColors.js";
+import { calculateDiceAndBonus } from "@/utils/diceCalculator.js";
+import { createAttributeCheck } from "@/services/rollService.js";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useRollContextMenu } from "@/composables/useRollContextMenu";
 
 const props = defineProps({
   hero: {
@@ -13,7 +13,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(['update:attribute']);
+const emits = defineEmits(["update:attribute"]);
 
 const { openRollContextMenu } = useRollContextMenu();
 
@@ -42,19 +42,19 @@ function performAttributeRoll(attribute, modifierOptions = {}) {
 
 function onAttributeRollModify(event, attribute) {
   openRollContextMenu(event, (finalSelectedModifiers) => {
-    performAttributeRoll(attribute, finalSelectedModifiers)
-  })
+    performAttributeRoll(attribute, finalSelectedModifiers);
+  });
 }
 
 function updateAttributeValue(key, event) {
   // Ensure the value is a number, as input type="number" can still return strings
   const newValue = Number(event.target.value);
-  emits('update:attribute', key, newValue);
+  emits("update:attribute", key, newValue);
 }
 
 function incrementAttribute(key) {
   const newValue = props.hero.attributes[key] + 5;
-  emits('update:attribute', key, newValue);
+  emits("update:attribute", key, newValue);
 }
 </script>
 
@@ -66,8 +66,15 @@ function incrementAttribute(key) {
         @click.prevent="performAttributeRoll(attribute)"
         @contextmenu="onAttributeRollModify($event, attribute)"
       >
-        <span class="attribute--hover-background" :style="{ backgroundColor: attributeColors[key] }"></span>
-        <font-awesome-icon :icon="['fas', 'fa-dice']" fixed-width class="text-primary"/>
+        <span
+          class="attribute--hover-background"
+          :style="{ backgroundColor: attributeColors[key] }"
+        ></span>
+        <font-awesome-icon
+          :icon="['fas', 'fa-dice']"
+          fixed-width
+          class="text-primary"
+        />
         <b :style="{ color: attributeColors[key] }">
           {{ $t(`attribute.${key}`) }}
         </b>

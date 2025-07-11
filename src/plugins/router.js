@@ -1,31 +1,31 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from "vue-router";
 
-import HomeView from '@/views/HomeView.vue';
-import HeroesListView from '@/views/Heroes/HeroesListView.vue';
-import HeroesDetailView from '@/views/Heroes/HeroesDetailView.vue';
+import HomeView from "@/views/HomeView.vue";
+import HeroesListView from "@/views/Heroes/HeroesListView.vue";
+import HeroesDetailView from "@/views/Heroes/HeroesDetailView.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: HomeView,
   },
   {
-    path: '/heroes',
-    name: 'heroes',
-    redirect: { name: 'heroes.list' },
+    path: "/heroes",
+    name: "heroes",
+    redirect: { name: "heroes.list" },
     children: [
       {
-        path: '',
-        name: 'heroes.list',
+        path: "",
+        name: "heroes.list",
         component: HeroesListView,
       },
       {
-        path: ':id',
-        name: 'heroes.detail',
+        path: ":id",
+        name: "heroes.detail",
         component: HeroesDetailView,
         props: true,
-        meta: { mainClass: 'container-fluid' },
+        meta: { mainClass: "container-fluid" },
       },
     ],
   },

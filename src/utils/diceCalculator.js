@@ -1,8 +1,8 @@
-import i18n from '@/plugins/i18n.js';
+import i18n from "@/plugins/i18n.js";
 import {
   ABILITY_HONE_LEVELS_MAP,
   ABILITY_HONE_LEVEL_IDS,
-} from '@/utils/abilityHoneLevels.js';
+} from "@/utils/abilityHoneLevels.js";
 
 const { t } = i18n.global;
 
@@ -101,7 +101,7 @@ function applyAbilityHone(pool, notationParts, abilityHoneLevelId) {
     // Add the predefined notation and replace placeholders if any
     let levelNotation = levelDetails.notation;
     // Replace 'D' with the translated 'diceShort' value (e.g., 'W' for German)
-    levelNotation = levelNotation.replace(/D/g, t('diceShort'));
+    levelNotation = levelNotation.replace(/D/g, t("diceShort"));
 
     notationParts.push(levelNotation);
   }
@@ -118,7 +118,7 @@ function applyAbilityHone(pool, notationParts, abilityHoneLevelId) {
  */
 export function calculateDiceAndBonus(
   value,
-  abilityHoneLevelId = ABILITY_HONE_LEVEL_IDS.NONE
+  abilityHoneLevelId = ABILITY_HONE_LEVEL_IDS.NONE,
 ) {
   const calculatedDice = calculateDice(value);
   const calculatedBonus = calculateBonus(value);
@@ -135,17 +135,17 @@ export function calculateDiceAndBonus(
       const diceSidesStr = String(diceSidesNum); // Convert back to string for object access
       const count = calculatedDice[diceSidesStr];
       pool.push({
-        type: 'dice',
+        type: "dice",
         sides: diceSidesNum,
         count: count,
       });
-      notationParts.push(`${count}${t('diceShort')}${diceSidesStr}`);
+      notationParts.push(`${count}${t("diceShort")}${diceSidesStr}`);
     });
 
   // Add the calculated bonus to the pool and notation
   if (calculatedBonus > 0) {
     pool.push({
-      type: 'bonus',
+      type: "bonus",
       bonus: calculatedBonus,
     });
     notationParts.push(`${calculatedBonus}`);
@@ -155,7 +155,7 @@ export function calculateDiceAndBonus(
   applyAbilityHone(pool, notationParts, abilityHoneLevelId);
 
   // Join the notation parts with '+'
-  const notation = notationParts.filter((part) => part).join('+');
+  const notation = notationParts.filter((part) => part).join("+");
 
   return {
     dice: calculatedDice, // This will be the raw object from calculateDice

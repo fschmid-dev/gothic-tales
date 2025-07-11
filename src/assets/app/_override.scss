@@ -30,29 +30,29 @@ $warning: $orange;
 $danger: $red;
 
 $colors: (
-  'red': $red,
-  'yellow': $yellow,
-  'green': $green,
-  'cyan': $cyan,
-  'white': $white,
-  'gray': $gray-600,
-  'gray-dark': $gray-800,
+  "red": $red,
+  "yellow": $yellow,
+  "green": $green,
+  "cyan": $cyan,
+  "white": $white,
+  "gray": $gray-600,
+  "gray-dark": $gray-800,
 );
 
 $theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'orange': $orange,
-  'success': $success,
-  'info': $info,
-  'warning': $warning,
-  'danger': $danger,
-  'white': $white,
-  'lighter': $lighter,
-  'light': $light,
-  'dark': $dark,
-  'darker': $darker,
-  'black': $black,
+  "primary": $primary,
+  "secondary": $secondary,
+  "orange": $orange,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "white": $white,
+  "lighter": $lighter,
+  "light": $light,
+  "dark": $dark,
+  "darker": $darker,
+  "black": $black,
 );
 
 $headings-margin-bottom: 0;

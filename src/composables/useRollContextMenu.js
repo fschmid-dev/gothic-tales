@@ -1,5 +1,5 @@
-import { ref, markRaw, computed, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, markRaw, computed, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 // Reactive state to control context menu visibility and position
 const isContextMenuOpen = ref(false);
@@ -9,9 +9,9 @@ const contextMenuCallback = ref(null); // Callback function to execute when a me
 
 // Reactive state to store the currently selected modifiers
 const selectedModifiers = ref({
-  rollType: 'normal', // 'normal', 'advantage', 'disadvantage'
-  modifierValue: 0,   // e.g., 0, 2, 5, 8, -2, -5, -8
-  attackRollType: null // e.g., null, 'followUp' (for follow-up attack)
+  rollType: "normal", // 'normal', 'advantage', 'disadvantage'
+  modifierValue: 0, // e.g., 0, 2, 5, 8, -2, -5, -8
+  attackRollType: null, // e.g., null, 'followUp' (for follow-up attack)
 });
 
 // References for event listeners to allow proper cleanup later
@@ -25,43 +25,67 @@ export function useRollContextMenu() {
   // Resets selected modifiers to their default state
   const resetModifiers = () => {
     selectedModifiers.value = {
-      rollType: 'normal',
+      rollType: "normal",
       modifierValue: 0,
-      attackRollType: null
+      attackRollType: null,
     };
   };
 
   // Returns options for the roll type (Normal, Advantage, Disadvantage)
   const getRollTypeOptions = () => [
-    { label: t('contextMenu.normalRoll'), key: 'rollType', value: 'normal' },
-    { label: t('contextMenu.advantageRoll'), key: 'rollType', value: 'advantage' },
-    { label: t('contextMenu.disadvantageRoll'), key: 'rollType', value: 'disadvantage' },
+    { label: t("contextMenu.normalRoll"), key: "rollType", value: "normal" },
+    {
+      label: t("contextMenu.advantageRoll"),
+      key: "rollType",
+      value: "advantage",
+    },
+    {
+      label: t("contextMenu.disadvantageRoll"),
+      key: "rollType",
+      value: "disadvantage",
+    },
   ];
 
   // Returns options for numerical modifiers (+/-2, +/-5, +/-8)
   // This computed property returns an empty array if 'normal' roll type is selected,
   // effectively hiding these options from the menu.
   const getModifierValueOptions = computed(() => {
-    if (selectedModifiers.value.rollType === 'normal') {
+    if (selectedModifiers.value.rollType === "normal") {
       return []; // Return empty array if "Normal Roll" is selected
     }
 
     const type = selectedModifiers.value.rollType;
     let sign = 1; // Default to positive (for Advantage)
-    if (type === 'disadvantage') {
+    if (type === "disadvantage") {
       sign = -1; // Negative for Disadvantage
     }
 
     return [
-      { label: t('contextMenu.modifierSmall', { value: 2 * sign }), key: 'modifierValue', value: 2 * sign },
-      { label: t('contextMenu.modifierMedium', { value: 5 * sign }), key: 'modifierValue', value: 5 * sign },
-      { label: t('contextMenu.modifierLarge', { value: 8 * sign }), key: 'modifierValue', value: 8 * sign },
+      {
+        label: t("contextMenu.modifierSmall", { value: 2 * sign }),
+        key: "modifierValue",
+        value: 2 * sign,
+      },
+      {
+        label: t("contextMenu.modifierMedium", { value: 5 * sign }),
+        key: "modifierValue",
+        value: 5 * sign,
+      },
+      {
+        label: t("contextMenu.modifierLarge", { value: 8 * sign }),
+        key: "modifierValue",
+        value: 8 * sign,
+      },
     ];
   });
 
   // Returns specific options for attack rolls (e.g., follow-up attack)
   const getAttackRollOptions = () => [
-    { label: t('contextMenu.followUpAttack'), key: 'attackRollType', value: 'followUp' },
+    {
+      label: t("contextMenu.followUpAttack"),
+      key: "attackRollType",
+      value: "followUp",
+    },
   ];
 
   // Helper function to recalculate and adjust the menu position to stay within the viewport
@@ -72,7 +96,7 @@ export function useRollContextMenu() {
     }
 
     // Get the context menu's DOM element by its ID
-    const menuElement = document.getElementById('context-menu-container');
+    const menuElement = document.getElementById("context-menu-container");
     if (!menuElement) {
       // The element might not be rendered yet or already removed; exit function.
       return;
@@ -110,7 +134,12 @@ export function useRollContextMenu() {
   };
 
   // Opens the context menu at the given event's coordinates
-  const openRollContextMenu = (event, callback = null, config = {}, initialModifiers = {}) => {
+  const openRollContextMenu = (
+    event,
+    callback = null,
+    config = {},
+    initialModifiers = {},
+  ) => {
     event.preventDefault(); // Prevent the native browser context menu
 
     resetModifiers(); // Reset modifiers to default values
@@ -131,27 +160,32 @@ export function useRollContextMenu() {
 
       // Add event listeners
       clickOutsideListener = (e) => {
-        const menuElement = document.getElementById('context-menu-container');
+        const menuElement = document.getElementById("context-menu-container");
         if (menuElement && !menuElement.contains(e.target)) {
           closeContextMenu();
         }
       };
       contextMenuOutsideListener = (e) => {
-        const menuElement = document.getElementById('context-menu-container');
+        const menuElement = document.getElementById("context-menu-container");
         if (menuElement && !menuElement.contains(e.target)) {
           closeContextMenu();
         }
       };
       escapeKeyListener = (e) => {
-        if (e.key === 'Escape') { // Check if the pressed key is 'Escape'
+        if (e.key === "Escape") {
+          // Check if the pressed key is 'Escape'
           closeContextMenu();
         }
       };
 
       // Add listeners to the document
-      document.addEventListener('click', clickOutsideListener, true); // Use capture phase for reliability
-      document.addEventListener('contextmenu', contextMenuOutsideListener, true); // Use capture phase
-      document.addEventListener('keydown', escapeKeyListener); // Listener for the Escape key
+      document.addEventListener("click", clickOutsideListener, true); // Use capture phase for reliability
+      document.addEventListener(
+        "contextmenu",
+        contextMenuOutsideListener,
+        true,
+      ); // Use capture phase
+      document.addEventListener("keydown", escapeKeyListener); // Listener for the Escape key
     }, 50); // 50ms delay for DOM render
   };
 
@@ -165,15 +199,19 @@ export function useRollContextMenu() {
 
     // Remove all added event listeners to prevent memory leaks
     if (clickOutsideListener) {
-      document.removeEventListener('click', clickOutsideListener, true);
+      document.removeEventListener("click", clickOutsideListener, true);
       clickOutsideListener = null;
     }
     if (contextMenuOutsideListener) {
-      document.removeEventListener('contextmenu', contextMenuOutsideListener, true);
+      document.removeEventListener(
+        "contextmenu",
+        contextMenuOutsideListener,
+        true,
+      );
       contextMenuOutsideListener = null;
     }
     if (escapeKeyListener) {
-      document.removeEventListener('keydown', escapeKeyListener);
+      document.removeEventListener("keydown", escapeKeyListener);
       escapeKeyListener = null;
     }
   };
@@ -183,15 +221,19 @@ export function useRollContextMenu() {
     const oldRollType = selectedModifiers.value.rollType; // Store old rollType for comparison
 
     // Logic for roll type selection
-    if (key === 'rollType' && value === 'normal') {
+    if (key === "rollType" && value === "normal") {
       selectedModifiers.value.modifierValue = 0; // Reset modifier to 0 if "Normal Roll"
-    } else if (key === 'rollType' && value !== 'normal' && selectedModifiers.value.modifierValue === 0) {
+    } else if (
+      key === "rollType" &&
+      value !== "normal" &&
+      selectedModifiers.value.modifierValue === 0
+    ) {
       // If switching from "normal" to advantage/disadvantage and modifier is still 0, set a default
-      selectedModifiers.value.modifierValue = (value === 'advantage' ? 2 : -2);
+      selectedModifiers.value.modifierValue = value === "advantage" ? 2 : -2;
     }
 
     // Logic for attack roll options (checkbox-like behavior)
-    if (key === 'attackRollType') {
+    if (key === "attackRollType") {
       if (selectedModifiers.value.attackRollType === value) {
         selectedModifiers.value.attackRollType = null; // Deselect option if already selected
       } else {
@@ -204,7 +246,10 @@ export function useRollContextMenu() {
 
     // If the roll type has changed, adjust the menu position
     // This is crucial because modifier options might appear/disappear, changing menu height.
-    if (key === 'rollType' && selectedModifiers.value.rollType !== oldRollType) {
+    if (
+      key === "rollType" &&
+      selectedModifiers.value.rollType !== oldRollType
+    ) {
       // A tiny delay ensures Vue has completed its DOM updates
       // before we measure the menu's new size for re-positioning.
       setTimeout(adjustContextMenuPosition, 0);
@@ -223,9 +268,9 @@ export function useRollContextMenu() {
   // This ensures the menu stays on screen if the window is resized while it's open.
   watch(isContextMenuOpen, (isOpen) => {
     if (isOpen) {
-      window.addEventListener('resize', adjustContextMenuPosition);
+      window.addEventListener("resize", adjustContextMenuPosition);
     } else {
-      window.removeEventListener('resize', adjustContextMenuPosition);
+      window.removeEventListener("resize", adjustContextMenuPosition);
     }
   });
 
@@ -242,6 +287,6 @@ export function useRollContextMenu() {
     triggerRoll,
     getRollTypeOptions,
     getModifierValueOptions,
-    getAttackRollOptions
+    getAttackRollOptions,
   };
 }

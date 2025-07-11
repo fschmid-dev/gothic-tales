@@ -1,4 +1,4 @@
-import i18n from '@/plugins/i18n.js'; // Import your i18n instance to get 'diceShort'
+import i18n from "@/plugins/i18n.js"; // Import your i18n instance to get 'diceShort'
 
 /**
  * Checks if a given string is a valid roll notation.
@@ -6,10 +6,10 @@ import i18n from '@/plugins/i18n.js'; // Import your i18n instance to get 'diceS
  * @returns {boolean} True if valid, false otherwise.
  */
 export function isRollNotationValid(notation) {
-  const shortDice = i18n.global.t('diceShort'); // Access global t() for translation
+  const shortDice = i18n.global.t("diceShort"); // Access global t() for translation
   const regex = new RegExp(
     `^([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)*$`,
-    'i'
+    "i",
   );
   return regex.test(notation);
 }
@@ -20,25 +20,25 @@ export function isRollNotationValid(notation) {
  * @returns {Array<object>} An array of objects, each representing a dice roll or a bonus.
  */
 export function parseRollNotation(notation) {
-  const shortDice = i18n.global.t('diceShort'); // Access global t() for translation
-  const regex = new RegExp(`([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)`, 'gi');
+  const shortDice = i18n.global.t("diceShort"); // Access global t() for translation
+  const regex = new RegExp(`([+-]?\\d*${shortDice}\\d+|[+-]?\\d+)`, "gi");
   const parts = notation.match(regex);
 
   if (!parts) return []; // Handle cases where no parts are matched
 
   const pool = parts.map((part) => {
-    const diceRegex = new RegExp(`(\\d*)${shortDice}(\\d+)`, 'i');
+    const diceRegex = new RegExp(`(\\d*)${shortDice}(\\d+)`, "i");
     const diceMatch = part.match(diceRegex);
 
     if (diceMatch) {
       return {
-        type: 'dice',
+        type: "dice",
         count: diceMatch[1] ? parseInt(diceMatch[1], 10) : 1,
         sides: parseInt(diceMatch[2], 10),
       };
     } else {
       return {
-        type: 'bonus',
+        type: "bonus",
         bonus: parseInt(part, 10),
       };
     }

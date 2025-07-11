@@ -1,31 +1,33 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import HeaderComponent from './components/layout/HeaderComponent.vue';
-import ContextMenu from '@/components/ContextMenu.vue';
+import { computed, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import HeaderComponent from "./components/layout/HeaderComponent.vue";
+import ContextMenu from "@/components/ContextMenu.vue";
 
 const route = useRoute();
 
-const currentMainContainerClass = ref('container');
-const nextMainContainerClass = computed(() => route.meta.mainClass || 'container');
-const transitionName = ref('fade-left');
+const currentMainContainerClass = ref("container");
+const nextMainContainerClass = computed(
+  () => route.meta.mainClass || "container",
+);
+const transitionName = ref("fade-left");
 
 watch(
   () => route.fullPath,
   (to, from) => {
-    const toDepth = to.split('/').filter(Boolean).length;
-    const fromDepth = from.split('/').filter(Boolean).length;
+    const toDepth = to.split("/").filter(Boolean).length;
+    const fromDepth = from.split("/").filter(Boolean).length;
 
     if (toDepth < fromDepth) {
-      transitionName.value = 'fade-right';
+      transitionName.value = "fade-right";
     } else {
-      transitionName.value = 'fade-left';
+      transitionName.value = "fade-left";
     }
-  }
+  },
 );
 
 function updateMainContainerClass() {
-    currentMainContainerClass.value = nextMainContainerClass.value;
+  currentMainContainerClass.value = nextMainContainerClass.value;
 }
 </script>
 
@@ -36,10 +38,10 @@ function updateMainContainerClass() {
   <RouterView v-slot="{ Component }">
     <main class="my-3" :class="currentMainContainerClass">
       <Transition
-          :name="transitionName"
-          mode="out-in"
-          @after-leave="updateMainContainerClass"
-          @before-enter="updateMainContainerClass"
+        :name="transitionName"
+        mode="out-in"
+        @after-leave="updateMainContainerClass"
+        @before-enter="updateMainContainerClass"
       >
         <Component :is="Component" />
       </Transition>
@@ -50,9 +52,9 @@ function updateMainContainerClass() {
 <style lang="scss">
 :root {
   --fade-transition-distance: 5rem;
-  
+
   @media (prefers-reduced-motion) {
-    --fade-transition-distance: .5rem;
+    --fade-transition-distance: 0.5rem;
   }
 }
 

@@ -5,13 +5,13 @@
  */
 export function generateId() {
   if (
-    typeof crypto !== 'undefined' &&
-    typeof crypto.randomUUID === 'function'
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
   ) {
     return crypto.randomUUID();
   } else {
     console.warn(
-      'crypto.randomUUID() not available, falling back to Date.now() for ID generation.'
+      "crypto.randomUUID() not available, falling back to Date.now() for ID generation.",
     );
     return Date.now();
   }

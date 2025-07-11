@@ -1,10 +1,10 @@
-import { createPinia } from 'pinia';
-import { createPiniaPersistPlugin } from '@/pinia/persistPlugin';
+import { createPinia } from "pinia";
+import { createPiniaPersistPlugin } from "@/pinia/persistPlugin";
 
 const pinia = createPinia();
 
 const piniaPersistPlugin = createPiniaPersistPlugin({
-  baseKey: 'gothic_tales',
+  baseKey: "gothic_tales",
 });
 
 pinia.use(piniaPersistPlugin);

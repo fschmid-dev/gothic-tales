@@ -1,7 +1,7 @@
 <script setup>
-import {useI18n} from 'vue-i18n';
-import {useRollContextMenu} from '@/composables/useRollContextMenu';
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { useI18n } from "vue-i18n";
+import { useRollContextMenu } from "@/composables/useRollContextMenu";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const {
   isContextMenuOpen,
@@ -15,43 +15,43 @@ const {
   getAttackRollOptions,
 } = useRollContextMenu();
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 // Basic styling for the menu (you'll want to style this properly with CSS)
 const menuStyle = (position) => ({
   left: `${position.x}px`,
   top: `${position.y}px`,
-  position: 'fixed',
-  backgroundColor: '#333',
-  border: '1px solid #555',
-  borderRadius: '4px',
-  boxShadow: '0 2px 10px rgba(0,0,0,0.5)',
+  position: "fixed",
+  backgroundColor: "#333",
+  border: "1px solid #555",
+  borderRadius: "4px",
+  boxShadow: "0 2px 10px rgba(0,0,0,0.5)",
   zIndex: 1000,
-  padding: '5px 0',
-  minWidth: '150px',
-  listStyle: 'none',
+  padding: "5px 0",
+  minWidth: "150px",
+  listStyle: "none",
   margin: 0,
 });
 
 const menuItemStyle = {
-  padding: '8px 15px',
-  cursor: 'pointer',
-  color: '#eee',
-  backgroundColor: 'transparent',
+  padding: "8px 15px",
+  cursor: "pointer",
+  color: "#eee",
+  backgroundColor: "transparent",
 };
 
 const menuItemHoverStyle = {
-  backgroundColor: '#555',
+  backgroundColor: "#555",
 };
 
 const dividerStyle = {
-  borderTop: '1px solid #555',
-  margin: '5px 0',
+  borderTop: "1px solid #555",
+  margin: "5px 0",
 };
 
 const boldDividerStyle = {
-  borderTop: '3px double #555', // Dickere Linie
-  margin: '5px 0',
+  borderTop: "3px double #555", // Dickere Linie
+  margin: "5px 0",
 };
 
 const isOptionSelected = (key, value) => {
@@ -61,27 +61,27 @@ const isOptionSelected = (key, value) => {
 
 <template>
   <ul
-      v-if="isContextMenuOpen"
-      :style="menuStyle(contextMenuPosition)"
-      id="context-menu-container"
+    v-if="isContextMenuOpen"
+    :style="menuStyle(contextMenuPosition)"
+    id="context-menu-container"
   >
     <li
-        v-for="(option, index) in getRollTypeOptions()"
-        :key="`roll-type-${index}`"
-        :style="menuItemStyle"
-        @click="selectOption(option.key, option.value)"
-        @mouseover="
+      v-for="(option, index) in getRollTypeOptions()"
+      :key="`roll-type-${index}`"
+      :style="menuItemStyle"
+      @click="selectOption(option.key, option.value)"
+      @mouseover="
         $event.currentTarget.style.backgroundColor =
           menuItemHoverStyle.backgroundColor
       "
-        @mouseleave="
+      @mouseleave="
         $event.currentTarget.style.backgroundColor =
           menuItemStyle.backgroundColor
       "
     >
       {{ option.label }}
       <span v-if="isOptionSelected(option.key, option.value)" class="ms-2">
-        <font-awesome-icon :icon="['fas', 'fa-check']"/>
+        <font-awesome-icon :icon="['fas', 'fa-check']" />
       </span>
     </li>
 
@@ -89,22 +89,22 @@ const isOptionSelected = (key, value) => {
       <li :style="dividerStyle"></li>
 
       <li
-          v-for="(option, index) in getModifierValueOptions"
-          :key="`mod-value-${index}`"
-          :style="menuItemStyle"
-          @click="selectOption(option.key, option.value)"
-          @mouseover="
+        v-for="(option, index) in getModifierValueOptions"
+        :key="`mod-value-${index}`"
+        :style="menuItemStyle"
+        @click="selectOption(option.key, option.value)"
+        @mouseover="
           $event.currentTarget.style.backgroundColor =
             menuItemHoverStyle.backgroundColor
         "
-          @mouseleave="
+        @mouseleave="
           $event.currentTarget.style.backgroundColor =
             menuItemStyle.backgroundColor
         "
       >
         {{ option.label }}
         <span v-if="isOptionSelected(option.key, option.value)" class="ms-2">
-          <font-awesome-icon :icon="['fas', 'fa-check']"/>
+          <font-awesome-icon :icon="['fas', 'fa-check']" />
         </span>
       </li>
     </template>
@@ -112,22 +112,23 @@ const isOptionSelected = (key, value) => {
     <template v-if="contextMenuConfig.includeFollowUpOption">
       <li :style="dividerStyle"></li>
 
-      <li v-for="(option, index) in getAttackRollOptions()"
-          :key="`attack-roll-${index}`"
-          :style="menuItemStyle"
-          @click="selectOption(option.key, option.value)"
-          @mouseover="
+      <li
+        v-for="(option, index) in getAttackRollOptions()"
+        :key="`attack-roll-${index}`"
+        :style="menuItemStyle"
+        @click="selectOption(option.key, option.value)"
+        @mouseover="
           $event.currentTarget.style.backgroundColor =
             menuItemHoverStyle.backgroundColor
         "
-          @mouseleave="
+        @mouseleave="
           $event.currentTarget.style.backgroundColor =
             menuItemStyle.backgroundColor
         "
       >
         {{ option.label }}
         <span v-if="isOptionSelected(option.key, option.value)" class="ms-2">
-          <font-awesome-icon :icon="['fas', 'fa-check']"/>
+          <font-awesome-icon :icon="['fas', 'fa-check']" />
         </span>
       </li>
     </template>
@@ -135,19 +136,19 @@ const isOptionSelected = (key, value) => {
     <li :style="boldDividerStyle"></li>
 
     <li
-        :style="{ ...menuItemStyle, textAlign: 'center', fontWeight: 'bold' }"
-        @click="triggerRoll"
-        @mouseover="
+      :style="{ ...menuItemStyle, textAlign: 'center', fontWeight: 'bold' }"
+      @click="triggerRoll"
+      @mouseover="
         $event.currentTarget.style.backgroundColor =
           menuItemHoverStyle.backgroundColor
       "
-        @mouseleave="
+      @mouseleave="
         $event.currentTarget.style.backgroundColor =
           menuItemStyle.backgroundColor
       "
     >
-      {{ t('contextMenu.rollButton') }}
-      <font-awesome-icon :icon="['fas', 'fa-dice']"/>
+      {{ t("contextMenu.rollButton") }}
+      <font-awesome-icon :icon="['fas', 'fa-dice']" />
     </li>
   </ul>
 </template>

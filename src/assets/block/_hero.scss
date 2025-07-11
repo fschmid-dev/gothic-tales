@@ -7,22 +7,22 @@
   gap: 0.5rem;
   grid-auto-flow: row;
   grid-template-areas:
-    'Info'
-    'Stats'
-    'Attributes'
-    'Abilities'
-    'Actions'
-    'Talents';
+    "Info"
+    "Stats"
+    "Attributes"
+    "Abilities"
+    "Actions"
+    "Talents";
 
   @include media-breakpoint-up(md) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, max-content);
     grid-auto-flow: row;
     grid-template-areas:
-    'Attributes Info'
-    'Attributes Stats'
-    'Abilities Actions'
-    'Abilities Talents';
+      "Attributes Info"
+      "Attributes Stats"
+      "Abilities Actions"
+      "Abilities Talents";
   }
 
   > div {

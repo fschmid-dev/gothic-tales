@@ -1,7 +1,7 @@
 <script setup>
-import { ref, watch, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { heroAttributes } from '@/models/Hero.js';
+import { ref, watch, computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { heroAttributes } from "@/models/Hero.js";
 
 const props = defineProps({
   // The initial action object to be edited
@@ -17,10 +17,9 @@ const { t } = useI18n();
 const formData = ref({
   id: props.initialAction.id,
   name: props.initialAction.name,
-  tags: props.initialAction.tags.join(', '), // Tags as a string for the input field
+  tags: props.initialAction.tags.join(", "), // Tags as a string for the input field
   attribute: props.initialAction.attribute,
-  includeAttributeDiceToRoll:
-    props.initialAction.includeAttributeDiceToRoll,
+  includeAttributeDiceToRoll: props.initialAction.includeAttributeDiceToRoll,
   notation: props.initialAction.notation,
   roll: props.initialAction.roll,
 });
@@ -41,14 +40,14 @@ watch(
     formData.value = {
       id: newAction.id,
       name: newAction.name,
-      tags: newAction.tags.join(', '),
+      tags: newAction.tags.join(", "),
       attribute: newAction.attribute,
       includeAttributeDiceToRoll: newAction.includeAttributeDiceToRoll,
       notation: newAction.notation,
       roll: newAction.roll,
     };
   },
-  { deep: true }
+  { deep: true },
 );
 
 // Expose the formData for external access if needed (for debugging or more complex interaction)
@@ -70,7 +69,7 @@ defineExpose({
         v-model="formData.name"
         :value="formData.name"
       />
-      <label for="action-name">{{ t('actionModal.nameLabel') }}</label>
+      <label for="action-name">{{ t("actionModal.nameLabel") }}</label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -81,7 +80,7 @@ defineExpose({
         v-model="formData.tags"
         :value="formData.tags"
       />
-      <label for="action-tags">{{ t('actionModal.tagsLabel') }}</label>
+      <label for="action-tags">{{ t("actionModal.tagsLabel") }}</label>
     </div>
     <div class="form-floating mb-3">
       <select
@@ -99,7 +98,7 @@ defineExpose({
         </option>
       </select>
       <label for="action-attribute">{{
-        t('actionModal.attributeLabel')
+        t("actionModal.attributeLabel")
       }}</label>
     </div>
     <div class="form-floating mb-3">
@@ -111,29 +110,26 @@ defineExpose({
         v-model="formData.notation"
         :value="formData.notation"
       />
-      <label for="action-roll">{{ t('actionModal.rollLabel') }}</label>
+      <label for="action-roll">{{ t("actionModal.rollLabel") }}</label>
     </div>
     <div class="text-start">
       <div class="form-check form-switch">
         <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="action-includeAttributeDiceToRoll"
-            :checked="formData.includeAttributeDiceToRoll"
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="action-includeAttributeDiceToRoll"
+          :checked="formData.includeAttributeDiceToRoll"
         />
-        <label
-            class="form-check-label"
-            for="action-includeAttributeDiceToRoll"
-        >
-          {{ $t('actionModal.includeAttributeDiceToRollLabel') }}
+        <label class="form-check-label" for="action-includeAttributeDiceToRoll">
+          {{ $t("actionModal.includeAttributeDiceToRollLabel") }}
         </label>
       </div>
       <label
-          id="checkIncludeAttributeDiceToRollHelp"
-          for="action-includeAttributeDiceToRoll"
-          class="form-text"
-          v-html="$t('actionModal.includeAttributeDiceToRollHelp')"
+        id="checkIncludeAttributeDiceToRollHelp"
+        for="action-includeAttributeDiceToRoll"
+        class="form-text"
+        v-html="$t('actionModal.includeAttributeDiceToRollHelp')"
       ></label>
     </div>
   </div>

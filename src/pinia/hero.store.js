@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useHeroStore = defineStore('hero', {
+export const useHeroStore = defineStore("hero", {
   state: () => ({
     heroes: [],
     loaded: false,
   }),
   persist: {
-    key: 'heroes',
-    paths: ['heroes'],
+    key: "heroes",
+    paths: ["heroes"],
   },
   getters: {
     getHeroes: (state) => state.heroes,
@@ -26,7 +26,7 @@ export const useHeroStore = defineStore('hero', {
     },
     deleteHero(heroToDelete) {
       const index = this.heroes.findIndex(
-        (hero) => hero.id === heroToDelete.id
+        (hero) => hero.id === heroToDelete.id,
       );
       if (index !== -1) {
         this.heroes.splice(index, 1);

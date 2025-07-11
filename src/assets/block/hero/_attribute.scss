@@ -23,14 +23,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: .05;
+    opacity: 0.05;
   }
 
   &:hover,
   &:focus,
   &:focus-within {
     .attribute--hover-background {
-      opacity: .25;
+      opacity: 0.25;
     }
   }
 }

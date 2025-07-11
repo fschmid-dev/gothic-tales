@@ -1,5 +1,5 @@
-import { toRaw } from 'vue';
-import localforage from 'localforage';
+import { toRaw } from "vue";
+import localforage from "localforage";
 
 localforage
   .setDriver([
@@ -9,13 +9,13 @@ localforage
   ])
   .then(() => {
     console.debug(
-      '[PiniaPersistPlugin] LocalForage drivers set: IndexedDB prioritized.'
+      "[PiniaPersistPlugin] LocalForage drivers set: IndexedDB prioritized.",
     );
   })
   .catch((err) => {
     console.error(
-      '[PiniaPersistPlugin] Failed to set LocalForage drivers:',
-      err
+      "[PiniaPersistPlugin] Failed to set LocalForage drivers:",
+      err,
     );
   });
 
@@ -60,11 +60,11 @@ function debounce(func, delay) {
  */
 export function createPiniaPersistPlugin(globalOptions = {}) {
   const {
-    baseKey: globalBaseKey = 'pinia',
-    keySeparator: globalKeySeparator = '-',
-    suffix: globalSuffix = 'data',
+    baseKey: globalBaseKey = "pinia",
+    keySeparator: globalKeySeparator = "-",
+    suffix: globalSuffix = "data",
     defaultDebounceDelay = 300,
-    excludePathsOnAutoPersist = ['loaded'],
+    excludePathsOnAutoPersist = ["loaded"],
   } = globalOptions;
 
   // The actual Pinia plugin function
@@ -85,7 +85,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       deserializer = (data) => JSON.parse(data), // Function to deserialize data after loading
       debounce: debounceDelay = defaultDebounceDelay, // Debounce delay for this specific store
       customKeyBuilder, // Optional: a function to completely customize the storage key
-    } = typeof persistOptions === 'object' ? persistOptions : {}; // If 'persist: true', options will be an empty object.
+    } = typeof persistOptions === "object" ? persistOptions : {}; // If 'persist: true', options will be an empty object.
 
     // Determine the effective paths to persist for this store.
     let effectivePaths;
@@ -96,7 +96,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       // If 'paths' is NOT explicitly defined (i.e., 'persist: true' or 'persist: {}'),
       // take all top-level state keys and filter out globally excluded paths.
       effectivePaths = Object.keys(store.$state).filter(
-        (path) => !excludePathsOnAutoPersist.includes(path)
+        (path) => !excludePathsOnAutoPersist.includes(path),
       );
     }
 
@@ -119,7 +119,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       // Determine the effective ID part for the key.
       // If storeSpecificKey is a function, call it with store ID.
       const idPart =
-        typeof storeSpecificKey === 'function'
+        typeof storeSpecificKey === "function"
           ? storeSpecificKey(store.$id)
           : storeSpecificKey || store.$id; // Fallback to store.$id if no specific key.
 
@@ -142,7 +142,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
         effectivePaths.forEach((path) => {
           if (
             deserializedData &&
-            typeof deserializedData === 'object' &&
+            typeof deserializedData === "object" &&
             deserializedData.hasOwnProperty(path)
           ) {
             patchData[path] = deserializedData[path];
@@ -155,13 +155,13 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       // Log any errors during the loading process.
       console.error(
         `[PiniaPersistPlugin] Error loading store '${store.$id}' (Key: ${storageKey}) from IndexDB:`,
-        error
+        error,
       );
     } finally {
       // Set the 'loaded' flag on the store, if it exists.
       // This indicates that the initial hydration attempt (successful or not) has completed.
       // The 'loaded' property should not be part of the persisted state itself.
-      if (store.hasOwnProperty('loaded')) {
+      if (store.hasOwnProperty("loaded")) {
         store.loaded = true;
       }
     }
@@ -177,7 +177,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
         // Log any errors during the saving process.
         console.error(
           `[PiniaPersistPlugin] Error saving store '${store.$id}' (Key: ${storageKey}) to IndexDB:`,
-          error
+          error,
         );
       }
     }, debounceDelay);
@@ -192,7 +192,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
           dataToPersist[path] = toRaw(state[path]); // Use toRaw to get a plain JavaScript object/array.
         } else {
           console.warn(
-            `[PiniaPersistPlugin] Path '${path}' in store '${store.$id}' not found. Will not be persisted.`
+            `[PiniaPersistPlugin] Path '${path}' in store '${store.$id}' not found. Will not be persisted.`,
           );
         }
       });
