@@ -16,7 +16,7 @@ export function rollPool(pool) {
       item: item,
     };
     switch (item.type) {
-      case "dice":
+      case "dice": {
         let partSum = 0;
         part.rolls = [];
 
@@ -29,6 +29,7 @@ export function rollPool(pool) {
         part.sum = partSum;
 
         break;
+      }
       case "bonus":
         part.sum = item.bonus;
         break;

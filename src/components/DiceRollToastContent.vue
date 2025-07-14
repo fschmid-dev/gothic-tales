@@ -3,7 +3,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
-const props = defineProps({
+defineProps({
   // Main header for the toast (e.g., Attribute Name, Ability Name, Action Name, ...)
   header: {
     type: String,

@@ -1,7 +1,5 @@
 <script setup>
-import { useHeroStore } from "@/pinia/hero.store";
-
-const props = defineProps({
+defineProps({
   hero: {
     type: Object,
     required: true,
@@ -9,8 +7,6 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["update:name"]);
-
-const heroStore = useHeroStore();
 
 function updateHeroName($event) {
   const newName = $event.target.value;

@@ -143,7 +143,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
           if (
             deserializedData &&
             typeof deserializedData === "object" &&
-            deserializedData.hasOwnProperty(path)
+            Object.prototype.hasOwnProperty.call(deserializedData, path)
           ) {
             patchData[path] = deserializedData[path];
           }
@@ -161,7 +161,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       // Set the 'loaded' flag on the store, if it exists.
       // This indicates that the initial hydration attempt (successful or not) has completed.
       // The 'loaded' property should not be part of the persisted state itself.
-      if (store.hasOwnProperty("loaded")) {
+      if (Object.prototype.hasOwnProperty.call(store, "loaded")) {
         store.loaded = true;
       }
     }
@@ -188,7 +188,7 @@ export function createPiniaPersistPlugin(globalOptions = {}) {
       // Collect only the data from the effectivePaths to be saved.
       effectivePaths.forEach((path) => {
         // Ensure the path actually exists in the current state before attempting to persist it.
-        if (state.hasOwnProperty(path)) {
+        if (Object.prototype.hasOwnProperty.call(state, path)) {
           dataToPersist[path] = toRaw(state[path]); // Use toRaw to get a plain JavaScript object/array.
         } else {
           console.warn(
